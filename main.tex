@@ -1,0 +1,2002 @@
+\documentclass{article}
+\usepackage{titlesec}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{ esint }
+\usepackage{ amssymb }
+\usepackage{fontenc}
+\usepackage{textcomp}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{ textcomp }
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{geometry}
+\usepackage{amssymb, gensymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{indentfirst}
+\usepackage{color}
+\usepackage{datetime}
+\usepackage{epigraph}
+\geometry{a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm}
+
+
+\newcommand{\heart}{\ensuremath\heartsuit}
+\newtheorem{statement}{Утверждение}[section]
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}
+\newtheorem{exercise}{Упражнение}
+\newtheorem{axiom}{Аксиома}
+\newtheorem{exmp}{Пример}[subsection]
+\newtheorem{theorem}{Теорема}[section]
+\newtheorem{remark}{Замечание}
+\newtheorem*{corollary}{Следствие}
+\newtheorem{proposition}{Предложение}[section]
+\newtheorem{lemma}{Лемма}[section]
+\newenvironment{ourproof}{\textit{\\ Доказательство.\\ }}{$\hfill \heartsuit$}
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
+\newenvironment{solution}[1]{\textbf{\\ Решение #1}}{\qed}
+
+
+\definecolor{g}{HTML}{006600}
+\definecolor{r}{HTML}{FF0000}
+\title{Геометрия}
+\author{Dmitry Tikhomirov}
+\newcommand{\RomanNumeralCaps}[1]
+    {\MakeUppercase{\romannumeral #1}}
+\definecolor{linkcolor}{HTML}{799B03} % цвет ссылок
+\definecolor{urlcolor}{HTML}{799B03} % цвет гиперссылок
+ 
+\hypersetup{pdfstartview=FitH,  linkcolor=linkcolor,urlcolor=urlcolor,colorlinks=true}
+
+
+
+\title{Geometry}
+\author{Dmitry Tikhomirov}
+\date{November 2018}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+\newpage
+
+\section{Векторная алгебра}
+
+\begin{definition}
+\textbf{Вектор} --- палочка со стрелочкой.
+\end{definition}
+
+\begin{definition}
+\textbf{Вектор} --- направленный отрезок.
+\end{definition}
+
+\begin{definition}
+Векторы $\overrightarrow{AB}$ и $\overrightarrow{CD}$ \textbf{равны} если
+\begin{enumerate}
+    \item $|\overrightarrow{AB}| = |\overrightarrow{CD}|$
+    \item $AB || CD$
+    \item $AB$ и $CD$ сонаправлены
+\end{enumerate}
+\end{definition}
+
+\begin{definition}
+Класс эквивалентности векторов в силу введённого равенства является \textbf{свободным вектором}.
+\end{definition}
+
+\begin{definition}
+\textbf{Свободный вектор} --- это параллельный перенос.
+\end{definition}
+
+\begin{statement}{Свойства линейных операций над векторами}
+\begin{enumerate}
+    \item $\vec a + \vec b = \vec b + \vec a$
+    \item $(\vec a + \vec b) + \vec c = \vec a + (\vec b + \vec c)$
+    \item $\vec a + \vec 0 = \vec a$
+    \item $\vec a + (-1)\cdot \vec a = \vec 0$
+    \item $(\alpha\beta)\vec a = \alpha(\beta\vec a)$
+    \item $(\alpha + \beta)\vec a = \alpha\vec a + \beta\vec b$
+    \item $\alpha(\vec a + \vec b) = \alpha\vec a + \beta\vec b$
+    \item $1\cdot\vec a = \vec a$
+\end{enumerate}
+\end{statement}
+
+\begin{definition}
+$\vec a - \vec b = \vec a + (-1)\vec b$
+\end{definition}
+
+\begin{definition}
+Пусть $M$ --- множество объектов в котором введены операции сложения и умножение объекта на число. Тогда для $a_1,\ a_2,\dots\ a_n\ \in M$ и $\alpha_1,\ \alpha_2,\dots \ \alpha_n\ \in \mathbb{R}$ выражение 
+$$\alpha_1 a_1 + \dots + \alpha_n a_n$$
+называется линейной комбинацией элементов $a_1,\ a_2,\dots\ a_n$ с коэффициентами $\alpha_1,\ \alpha_2,\dots \ \alpha_n$
+\end{definition}
+
+
+\begin{definition}
+Cистема (набор) векторов $\{ \vec a_1,\ \vec a_2,\dots\ \vec a_n \}$ называется линейно независимой, если из того, что линейная комбинация этих векторов равна $\vec 0$ следует, что все коэффициенты этой комбинации равны $0$.
+
+$$\alpha_1\vec a_1 + \dots + \alpha_n\vec a_n = \vec 0 \Longrightarrow \alpha_1 = \alpha_2 =\dots = \alpha_n = 0 $$
+\end{definition}
+
+\begin{definition}{(ненужное)}
+Система $\{ \vec a_1,\ \vec a_2,\dots\ \vec a_n \}$ называется линейно зависимой, если $\exists \alpha_1,\ \alpha_2,\ \dots\ \alpha_n$ не все равные $0$, такие что $\alpha_1\vec a_1 + \dots + \alpha_n\vec a_n = \vec 0$
+\end{definition}
+
+\begin{theorem}{(Критерий линейной зависимости системы, состоящей из одного вектора)}
+$\{\vec a_1\}$ линейно зависима $\Longleftrightarrow\ \vec a_1 = \vec 0$
+
+\begin{ourproof}
+$\longrightarrow )$ $\{\vec a_1\}$ линейно зависима $\xrightarrow{def}\ \exists\alpha_1\neq 0\quad |\ \alpha_1\vec a_1 = \vec 0 \Longrightarrow \vec a_1 = \vec 0$
+\newline
+$\longleftarrow )$ $\vec a_1 = \vec 0 \Longrightarrow 5\cdot\vec a_1 = \vec 0$, но $5\neq 0 \Longrightarrow \{\vec a_1\}$ --- линейно зависима.  
+\end{ourproof}
+\end{theorem}
+
+\begin{theorem}{(Критерий линейной зависимости системы из $n\geqslant 2$ векторов)}
+\newline
+$\{ \overrightarrow{a_1},\ \overrightarrow{a_2},\ \dots\ \overrightarrow{a_n}\} \textrm{ --- линейно зависимы } \Longleftrightarrow \textrm{ хотя бы один из }  \overrightarrow{a_1},\ \overrightarrow{a_2},\ \dots\ \overrightarrow{a_n}$\  является линейной комбинацией остальных.
+\begin{proof}
+
+$\longrightarrow )\ \{ \overrightarrow{a_1},\ \overrightarrow{a_2},\ \dots\ \overrightarrow{a_n} \} $ --- линейно зависима $\Longrightarrow\ \exists\ \alpha_1,\ \alpha_2,\ \dots ,\ \alpha_n $ не все нули, такие что 
+$$\sum_{i=1}^{n}\alpha_i \overrightarrow{a_i} = \overrightarrow{0}$$
+Пусть $\alpha_1\neq 0$ тогда
+$$\alpha_1 \overrightarrow{a_1}\ +\ \alpha_2 \overrightarrow{a_2}\ +\ \dots\ +\ \alpha_n \overrightarrow{a_n} = \overrightarrow{0}\ \ | :\alpha_1\neq 0$$
+$$ \overrightarrow{a_1} + \dfrac{\alpha_2}{\alpha_1}\overrightarrow{a_2} + \dots + \dfrac{\alpha_n}{\alpha_1}\overrightarrow{a_n} = \overrightarrow{0}$$
+$$\overrightarrow{a_1} = -\dfrac{\alpha_2}{\alpha_1}\overrightarrow{a_2} - \dots - \dfrac{\alpha_n}{\alpha_1}\overrightarrow{a_n}    $$
+
+$\longleftarrow )\ \overrightarrow{a_1} = k_2\overrightarrow{a_2} + k_3\overrightarrow{a_3} + \dots + k_n\overrightarrow{a_n} = \overrightarrow{0}\ \ k_i\in\mathbb{R}$
+$$ 1\cdot\overrightarrow{a_1} - k_2\overrightarrow{a_2} + \dots + k_n\overrightarrow{a_n} = \overrightarrow{0}$$
+коэффициент при $\overrightarrow{a_1}$ равен 1 $\Longrightarrow$ система --- линейно зависима.
+\end{proof}
+\end{theorem}
+
+\begin{theorem}
+Любая подсистема линейно независимой системы является линейно независимой системой.
+\end{theorem}
+
+\begin{theorem}
+Любая <<надсистема>> линейно зависимой системы являетмя линейно зависимой системой.
+\end{theorem}
+
+\begin{theorem}
+
+На прямой любая система из $n\geqslant 2$ векторов линейно зависима.
+
+На плоскости любая система из $n\geqslant 3$ векторов линейно зависима.
+
+В пространстве любая система из $n\geqslant 4$ векторов линейно зависима.
+\end{theorem}
+
+\begin{definition}
+Векторы называются коллинеарными, если все они параллельны друг другу или одной прямой.
+
+Векторы называются компланарными, если они параллельны одной плоскости.
+\end{definition}
+
+\begin{definition}
+\textbf{Базисом} в множестве векторов называется \textit{упорядоченная}, максимальная (по числу векторов) линейно независимая система векторов в этом множестве.
+
+\underline{На прямой } любой ненулевой вектор --- базис;
+
+\underline{На плоскости } любые два неколлинеарных вектора --- базис;
+
+\underline{В пространстве } любые три некомпланарных вектора --- базис;
+\end{definition}
+
+\begin{theorem}
+Любой вектор однозначно раскладывается по данному базису.
+\begin{proof}
+Пусть $\{\overrightarrow{e_1},\ \overrightarrow{e_2},\ \overrightarrow{e_3}\}$ --- базис, $\overrightarrow{a}$ --- вектор. Рассмотрим $\{\overrightarrow{a},\ \overrightarrow{e_1},\ \overrightarrow{e_2},\ \overrightarrow{e_3}\}$ --- линейно зависима, значит $\exists\ k_1,\ k_2,\ k_3,\ k_4 $ не все нули, такие что $k_1\overrightarrow{a} + k_2\overrightarrow{e_1} + k_3\overrightarrow{e_2} + k_4\overrightarrow{e_3} = \overrightarrow{0}$
+
+Если $k_1 = 0$, то $k_2\overrightarrow{e_1} + k_3\overrightarrow{e_2} + k_4\overrightarrow{e_3} = \overrightarrow{0}$, где $k_2,\ k_3,\ k_4 $ --- не все нули, тогда $\{\overrightarrow{e_1},\ \overrightarrow{e_2},\ \overrightarrow{e_3}\}$ --- линейно зависима, что невозможно, так как это --- базис. Следовательно, $k_1\neq 0 \longrightarrow \vec a = \dfrac{k_2}{k_1}\overrightarrow{e_1} + \dfrac{k_3}{k_1}\overrightarrow{e_2} + \dfrac{k_4}{k_1}\overrightarrow{e_3}$. $\vec a$ --- линейная комбинация.
+
+\textit{Докажем единственность!}
+
+Пусть не единтсвенно.
+$$\vec a = \alpha_1 \overrightarrow{e_1} + \alpha_2 \overrightarrow{e_2} + \alpha_3 \overrightarrow{e_3}$$
+$$\vec a = \beta_1  \overrightarrow{e_1} + \beta_2  \overrightarrow{e_2} + \beta_3  \overrightarrow{e_3}$$
+$$\vec 0 = (\alpha_1 - \beta_1)\overrightarrow{e_1} + (\alpha_2 - \beta_2)\overrightarrow{e_2} + (\alpha_3 - \beta_3)\overrightarrow{e_3}$$
+$\{\overrightarrow{e_1},\ \overrightarrow{e_2},\ \overrightarrow{e_3}\}$ --- базис $\Longrightarrow$
+$$
+\begin{array}{c}
+    \alpha_1 - \beta_1 = 0 \\
+    \alpha_2 - \beta_2 = 0 \\
+    \alpha_3 - \beta_3 = 0
+\end{array}
+\Longrightarrow
+\begin{array}{c}
+     \alpha_1 = \beta_1 \\
+     \alpha_2 = \beta_2 \\
+     \alpha_3 = \beta_3
+\end{array}
+$$
+Противоречит единственности.
+\end{proof}
+\end{theorem}
+
+\textbf{Система координат } --- это набор <<точка + базис>>
+
+\textbf{Радиус вектор}, как и любой вектор, по предыдущей теореме раскладывается по базису. Набор коэффициентов называется \textbf{координатами точки}.
+
+\begin{theorem}
+Координаты вектора $\overrightarrow{M_1 M_2}$, где $M_1 (x_1,\ y_1,\ z_1)$ и $M_2 (x_2,\ y_2,\ z_2)$, находятся по правилу: координаты конца минус координаты начала.
+\begin{proof}
+$$\overrightarrow{OM_1} + \overrightarrow{M_1M_2} = \overrightarrow{OM_2}$$
+Отсюда
+$$\overrightarrow{M_1M_2} = \overrightarrow{OM_2} - \overrightarrow{OM_1}$$
+Из однозначного разложения по базису следует, что при действиях над векторами (сложение и умножение на число) надо делать те же действия над их координатами.
+
+$$\overrightarrow{M_1M_2} = (x_2,\ y_2,\ z_2) - (x_1,\ y_1,\ z_1) - = (x_2-x_1,\ y_2-y_1,\ z_2-z_1)$$
+\end{proof}
+\end{theorem}
+
+\begin{exercise}{(Деление отрезка в заданном отношении)}
+\newline
+Найти на отрезке $AB$ точку $M$, такую что $$\dfrac{AM}{MB} = \dfrac{\lambda}{\mu},\ \lambda > 0,\ \mu>0$$
+\begin{solution}{}
+Требуется чтобы
+$$\mu|\overrightarrow{AM}| = \lambda|\overrightarrow{MB}|$$
+Пусть заданы точки $A\ (x_0,\ y_0,\ z_0),\ B\ (x_1,\ y_1,\ z_1),\ M\ (x,\ y,\ z)$ и $\mu\overrightarrow{AM} = \lambda\overrightarrow{MB}$
+
+Первая координата $\overrightarrow{AM}$ есть $\mu(x_1-x_0) = \lambda(x_1-x)$
+
+Вторая координата $\overrightarrow{AM}$ есть $\mu(y_1-y_0) = \lambda(y_1-y)$
+
+Третья координата $\overrightarrow{AM}$ есть $\mu(z_1-z_0) = \lambda(z_1-z)$
+
+Тогда
+$x = \dfrac{\lambda x_1 + \mu x_0}{\lambda + \mu}$,
+$y = \dfrac{\lambda y_1 + \mu y_0}{\lambda + \mu}$,
+$z = \dfrac{\lambda z_1 + \mu z_0}{\lambda + \mu}$
+\end{solution}
+\end{exercise}
+
+\begin{corollary}
+Координаты середины отрезка $AB$ находятся по формулам:
+$x = \dfrac{x_0+x_1}{2},\ y = \dfrac{y_0+y_1}{2}\ z = \dfrac{z_0+z_1}{2}$
+\end{corollary}
+
+\begin{remark}
+Если $\lambda$ и $\mu$ разных знаков, то то же можно говорить о делении в данном отношении, но тогда точка $M$ здесь вне $AB$.
+\end{remark}
+
+\textbf{Ортоганальный} $\equiv$ перепендикулярный.
+
+\begin{definition}
+Базис (и система координат) называются \textbf{ортоганальными}, если $\vec e_1 \bot \vec e_2$, $\vec e_1 \bot \vec e_3$, $\vec e_2 \bot \vec e_3$. 
+Базис называется \textbf{ортонормированным}, если он ортоганальный и $|\vec e_1| = |\vec e_2| = |\vec e_3| = 1$ (нормированный).
+\end{definition}
+
+\begin{definition}
+\textbf{Скалярным произведением} $(\vec a,\ \vec b)$ вектора $\vec a$ на вектор $\vec b$ называется \fbox{{\Huge число}}, определяемое формулой
+$$(\vec a,\ \vec b) = |\vec a|\cdot |\vec b|\cdot \cos{(\widehat{\vec a,\ \vec b})}$$
+$$(\ ,\ ) : \mathbb{R}^3\times \mathbb{R}^3 \longrightarrow \mathbb{R}$$
+\end{definition}
+
+\begin{theorem}{(Свойства скалярного произведения)}
+\begin{enumerate}
+    \item $(\vec a,\ \vec b) = (\vec b,\ \vec a)$
+    \item $(\vec a,\ \vec a) = |a|^2 \Longrightarrow |a| = \sqrt{(\vec a,\ \vec a)}$
+    \item $(\vec a,\ \vec a) = 0 \Longleftrightarrow |\vec a| = 0$
+    \item $(\vec a,\ \vec b) = 0 \Longleftrightarrow \vec a = \vec 0,\ \textrm{ или } \vec b = \vec 0,\ \textrm{ или } \vec a \bot \vec b$
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}
+Базис --- ортонормированный $\Longleftrightarrow\ (\vec e_i,\ \vec e_j) = \begin{cases}
+1, & i=j\\
+0, & i\neq j
+\end{cases},\quad i,j\in\{1,\ 2,\ 3\}
+$
+
+$\delta_{ij} = \begin{cases}
+1, & i=j\\
+0, & i\neq j
+\end{cases}$ --- символ Кронекера
+
+$(\vec e_i,\ \vec e_j) = \delta_{ij}$
+\end{theorem}
+
+\begin{theorem}
+Координаты вектора $\vec a = \alpha_1\vec e_1 + \alpha_2\vec e_2 + \alpha_3\vec e_3$ в ортоганальном базисе находятся по формулам
+$$\alpha_1 = \dfrac{(\vec a,\ \vec e_1)}{|\vec e_1|^2},\quad i\in \{1,\ 2,\ 3\}$$
+\begin{proof}
+$$\alpha_1 |\vec e_1| = |\vec a|\cos{\varphi }\quad |\cdot |\vec e_1| $$
+$$\alpha_1 |\vec e_1|^2 = |\vec a||\vec e_1|\cos{\varphi } $$
+$\alpha_1\cdot |\vec e_1|^2$ --- скалярное произведение
+$$\alpha_1\cdot |\vec e_1|^2 = (\vec a,\ \vec e_1) \Longrightarrow \alpha_1 = \dfrac{\vec a,\ \vec e_1}{|\vec e_1|^2}$$
+\end{proof}
+\end{theorem}
+
+\begin{theorem}{(Линейность скалярного произведения)}
+$(\alpha\vec a + \beta\vec b,\ \vec c) = \alpha(\vec a,\ \vec c) + \beta(\vec b,\ \vec c) $
+\begin{proof}
+1) Пусть $\vec c = \vec 0$, тогда очевидно;
+
+2) $\vec c \neq \vec 0$ Пусть $\vec c$ --- первый базисный вектор, а остальные базисные вектора выберем, как хотим, но ортоганальными вектору $\vec c$ и между собой.
+
+По предыдущей теореме первая координата вектора $\alpha\vec a + \beta\vec b$ есть $\dfrac{(\alpha\vec a + \beta\vec b,\ \vec e_1)}{|\vec e_1|^2}$
+
+Первая координата вектора $\vec a$ есть $\dfrac{(\vec a,\ \vec e_1)}{|\vec e_1|^2}$
+
+Первая координата вектора $\vec b$ есть $\dfrac{(\vec b,\ \vec e_1)}{|\vec e_1|^2}$
+
+$\alpha\vec a + \beta\vec b$ --- это линейная комбинация векторов $\vec a$ и $\vec b$, поэтому
+$$\dfrac{\alpha\vec a + \beta\vec b}{|\vec e_1|^2} = \dfrac{\alpha(\vec a,\ \vec e_1)}{|\vec e_1|^2} + \dfrac{\beta(\vec b,\ \vec e_1)}{|\vec e_1|^2}\quad |\cdot |\vec e_1|^2 $$
+$$(\alpha\vec a + \beta\vec b,\ \vec e_1) = \alpha(\vec a,\ \vec e_1) + \beta(\vec b,\ \vec e_1)\quad |\vec e_1 \equiv \vec c $$
+\end{proof}
+\end{theorem}
+
+\begin{theorem}{(Формула для вычисления скалярного произведения в ортонормированном базисе)}
+\begin{proof}
+$\vec a (x_1,\ y_1,\ z_1) = x_1\vec e_1 + y_1\vec e_2 + z_1\vec e_3$
+\newline
+$\vec b (x_2,\ y_2,\ z_2) = x_2\vec e_1 + y_2\vec e_2 + z_2\vec e_3$
+
+$$ (\vec a,\ \vec b) = (x_1\vec e_1 + y_1\vec e_2 + z_1\vec e_3,\ x_2\vec e_1 + y_2\vec e_2 + z_2\vec e_3) = x_1x_2(\vec e_1,\ \vec e_1) + x_1y_1(\vec e_1,\ \vec e_2) + x_1z_2(\vec e_1,\ \vec e_3) + \dots + z_1z_2(\vec e_3,\ \vec e_3) = x_1x_2 + y_1y_2 + z_1z_2$$
+Итак
+$$(\vec a,\ \vec b) = x_1x_2 + y_1y_2 + z_1z_2$$
+\end{proof}
+\end{theorem}
+
+\begin{definition}
+\textbf{Векторным произведением} $[\vec a,\ \vec b]$ вектора $\vec a$ на вектор $\vec b$ называется вектор $\vec c$, такой что
+\begin{enumerate}
+    \item $|\vec c| = |\vec a||\vec b|\sin{\widehat{(\vec a,\ \vec b)}}$
+    \item $\vec c \bot \vec a$ и $\vec c \bot \vec b$
+    \item Тройка $\langle \vec a,\ \vec b,\ \vec c\rangle$ --- правая
+\end{enumerate}
+\end{definition}
+
+\begin{definition}
+Упорядоченная тройка векторов называется \textbf{правой}, если глядя с концы вектора $\vec c$ (третьего) мы видим поворотот первого ко второму на наименьший угол как поворот против часой стрелки.
+\end{definition}
+
+\begin{theorem}
+$$[\vec a,\ \vec b] = - [\vec b,\ \vec a]$$
+\begin{proof}
+Правая тройка заменится на левую.
+\end{proof}
+\end{theorem}
+
+
+\begin{definition}
+\textbf{Смешанным произведением векторов} $\vec a,\ \vec b,\ \vec c$ в указанном порядке называется \fbox{{\Huge число}} $(\vec a,\ \vec b,\ \vec c) = (\vec a,\ [\vec b,\ \vec c])$ 
+\end{definition}
+
+\begin{theorem}{(Геометрический смысл смешанного произведения)}
+$$|(\vec a,\ \vec b,\ \vec c)| = V_{\textrm{параллилепипеда, построеного на } \vec a,\ \vec b,\ \vec c \textrm{ c как на сторонах}}$$
+
+\begin{proof}
+$V = S_{\textrm{осн}}\cdot h = \left|[\vec c,\ \vec b]\right|\cdot h = \left|[\vec c,\ \vec b]\right|\cdot (|\vec a|\cos{(\alpha)}) = (\vec a,\ [\vec b,\ \vec c]) = (\vec a,\ \vec b,\ \vec c)$
+
+Для картинки всё верно, для второго случая, когда <<вектор $\vec a$ вниз>>, то есть тройка $\langle \vec b,\ \vec c,\ \vec a \rangle$ --- левая, получится знак << -- >>. Чтобы это поправить в формулировке стоит модуль.
+$V = (\vec a,\ \vec b,\ \vec c)$
+\end{proof}
+\end{theorem}
+
+\begin{theorem}
+$$(\vec a,\ \vec b,\ \vec c) = 0 \Longleftrightarrow \vec a,\ \vec b,\ \vec c \textrm{ --- компланарны}$$
+\begin{proof}
+Геометрическое
+\end{proof}
+\end{theorem}
+
+\begin{theorem}
+$$(\vec a,\ \vec b,\ \vec c) = (\vec b,\ \vec c,\ \vec a) = (\vec c,\ \vec a,\ \vec b) = - (\vec a,\ \vec c,\ \vec b) = - (\vec b,\ \vec a,\ \vec c) = -  (\vec c,\ \vec b,\ \vec a)$$
+\begin{proof}
+При циклической смене порядка сомножителей смешанное произведение не меняется, в противном случае меняет знак.
+\end{proof}
+\end{theorem}
+
+\begin{theorem}
+Смешанное произведение линейно.
+\begin{proof}
+$(\lambda\vec a_1 + \mu\vec a_2,\ \vec b,\ \vec c) = (\lambda\vec a_1 + \mu\vec a_2,\ [\vec b,\ \vec c]) = \lambda(\vec a_1,\ [\vec b,\ \vec c]) + \mu(\vec a_2,\ [\vec b,\ \vec c]) \stackrel{опр}{=} \lambda(\vec a_1,\ \vec b,\ \vec c) + \mu(\vec a_1,\ \vec b,\ \vec c)$
+Таким образом линейность смешанного произведения по первому сомножителю доказано. Из предыдущей теоремы следует линейность по второму и третьему.
+\end{proof}
+\end{theorem}
+
+
+\begin{theorem}{(Линейность векторного произведения)}
+$$[\lambda\vec a + \mu\vec b,\ \vec c] = \lambda [\vec a,\ \vec c] + \mu[\vec b,\ \vec c]$$
+\begin{proof}
+Запишем линейность смешанного произведения по второму сомножителю:
+$$(\vec d,\ [\lambda\vec a,\ \mu\vec b,\ \vec c] = \lambda(\vec d,\ [\vec a,\ \vec c]) + \mu(\vec d,\ [\vec b,\ \vec c])$$
+
+Пусть $\{\vec e_1,\ \vec e_2,\ \vec e_3 \}$ --- ортонормированный базис.
+
+1) Положим $\vec d = \vec e_1$. Получаем $(\vec e_1,\ [\cdot\ ,\cdot\ ]$ --- первая координата вектора. Таким образом для первой координаты получилась нужная линейность. 
+
+2) Забудем и положим $\vec d = \vec e_2$. Mutatis mutandis. Получим линейность для второй координаты.
+
+3) Снова забудем и положим $\vec d = \vec e_3$. Mutatis mutandis. Получим линейность для третьей координаты.
+
+Так как действиям сложения и умножения на число с векторами взаимно однозначно отвечают те же действия с координатами, то получаем, что теорема верна.
+\end{proof}
+\end{theorem}
+
+\begin{statement}{(Формула для вычисления векторного произведения через координаты векторов в ортонормированном базисе)}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c|c|c}
+          $\quad$  &  $\vec i$ & $ \vec j$ & $ \vec k$ \\\hline
+          $\vec i$ & $ \vec 0$ & $ \vec k$ & $-\vec j$ \\\hline
+          $\vec j$ & $-\vec k$ & $ \vec 0$ & $ \vec i$ \\\hline
+          $\vec k$ & $ \vec j$ & $-\vec i$ & $ \vec 0$
+    \end{tabular}
+    \caption{Векторные произведения векторов ортонормированного базиса (столбец на строку)}
+    \label{tab:vec_pow}
+\end{table}
+
+$$[\vec a,\ \vec b] = \begin{vmatrix}
+\vec i & \vec j & \vec k \\
+a_1 & a_2 & a_3 \\
+b_1 & b_2 & b_3
+\end{vmatrix} $$
+\end{statement}
+
+\begin{statement}{(Формула для вычисления смешанного произведения через координаты векторов в ортонормированном базисе)}
+$$(\vec a,\ [\vec b,\ \vec c]) = (\vec a,\ \vec b,\ \vec c) = 
+\begin{vmatrix}
+a_1 & a_2 & a_3 \\
+b_1 & b_2 & b_3 \\
+c_1 & c_2 & c_3 
+\end{vmatrix}$$
+\end{statement}
+
+\begin{statement}{(Формула для вычисления длины вектора через координаты его концов)}
+$$|\overrightarrow{M_1M_2}| = \sqrt{(M_1M_2)^2} = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2 + (z_2 - z_1)^2}$$
+\end{statement}
+
+ 
+\textbf{\Huge Геометрия}
+\\
+\\
+\textbf{Соглашения}
+
+1) если ничего не сказано, то базис --- ортонормированный 
+
+2) говорят, что $F(x,\ y) = 0$ определяет линию $S$ на плосоксти, если:
+\begin{enumerate}
+    \item $\forall M(x_0,\ y_0)\in S$ имеем $F(x_0,\ y_0)  =   0$
+    \item $\forall M(x_0,\ y_0)\in S$ имеем $F(x_0,\ y_0) \neq 0$
+\end{enumerate}
+
+\section{Прямая на плоскости.}
+
+\subsection{Векторное параметрическое уравнение}
+
+$\overrightarrow{M_0M}\ ||\ \vec a$ по построению. 
+
+$(\vec a\ ||\ L)\quad (\vec a \neq \vec 0)$ --- направляющий вектор
+
+$\overrightarrow{M_0M} = \vec r - \vec r_0 = t\vec a$
+
+$$\boxed{\vec r = \vec r_0 + t\vec a} \eqno(1)$$
+
+\subsection{Параметрическое уравнение}
+
+$\vec r\ (x,\ y)\quad \vec r_0\ (x_0,\ y_0)\quad \vec a\ (a_1,\ a_2)$
+
+$(x,\ y) = (x_0,\ y_0) + t(a_1,\ a_2)\quad \textrm{это --- (1)}$
+
+
+$$\boxed{\begin{cases}
+x = x_0 + ta_1 \\
+y = y_0 + ta_2
+\end{cases}\quad t\in\mathbb{R}}\eqno(2)$$
+
+
+\subsection{Школьное, с угловым коэффициентом}
+
+Исключаем из (2) параметр
+$t = \dfrac{x - x_0}{a_1}, \quad \textrm{если } a_1\neq 0$
+
+$y = y_0 + \dfrac{x - x_0}{a_1}a_2$
+
+$y = \underbrace{\dfrac{a_2}{a_1}}_{k}x + \underbrace{y_0 - \dfrac{a_2x_0}{a_1}}_{b}$
+
+$$\boxed{y = kx + b}\eqno(3)$$
+
+$x = \tg{\alpha}$ --- тангенс угла наклона
+
+При $x = 0$ имеем $y = b$, где $b$ --- начальная ордината
+
+\begin{remark}
+Так задаются все прямые, кроме вертикальных.
+\end{remark}
+
+\subsection{Каноническое уравнение}
+
+Уничтожим $t$ в (2) по-другому:
+
+$\begin{matrix}
+\textrm{Из первого } t = \dfrac{x-x_0}{a_1}\\
+\textrm{Из второго } t = \dfrac{y-y_0}{a_2}
+\end{matrix}\quad $
+$$\boxed{\dfrac{x-x_0}{a_1} = \dfrac{y-y_0}{a_2}} \eqno(4)$$
+
+\begin{remark}
+\textit{Соглашение: } разрешается писать:
+$\dfrac{x - x_0}{a_1} = \dfrac{y - y_0}{0}$, что означает, что и $y - y_0 = 0$, то есть $y = y_0$
+\end{remark}
+
+\subsection{Уравнение прямой через две точки}
+
+Считая начальной точкой $M$, напишем каноническое уравнение
+$$\boxed{\dfrac{x - x_1}{x_2 - x_1} =  \dfrac{y - y_1}{y_2 - y_1}} \eqno(5)$$
+
+\subsection{Уравнение прямой <<в отрезках>>}
+
+Пусть прямая $L$ не проходит через $O\ (0,\ 0)$. Следовательно, она пересекает обе оси, пусть в точках $(a,\ 0)$ и $(0,\ b)$. Запишем прямую $L$ как прямую через две точки
+
+$$ \dfrac{x - a}{0 - a} = \dfrac{y - 0}{b - 0}$$
+
+$$\dfrac{x - a}{-a} = \dfrac{y}{b} $$
+
+$$-\dfrac{x}{a} + 1 = \dfrac{y}{b}$$
+
+$$\boxed{\dfrac{x}{a} + \dfrac{y}{b} = 1}\eqno(6)$$
+
+\subsection{Векторное уравнение}
+
+$\vec n \neq \vec 0$
+
+Вектор $(\vec r - \vec r_0)\ \bot\ \vec n\quad \forall \vec r (x,\ y),\ (x,\ y)\in L$
+
+$$\boxed{(\vec r - \vec r_0,\ \vec n) = 0}\eqno(7)$$
+
+\subsection{Общее уравнение прямой}
+
+Положим в (7) $\vec n = (A,\ B)$. Распишем (7) считая систему координат ортонормированной.
+
+$$\left( \left( (x - x_0),\ (y - y_0) \right),\ (A,\ B) \right) = (x - x_0)A + (y - y_0)B = Ax + By + \underbrace{(-1)\cdot(x_0A + y_0B)}_{C} = 0$$
+
+$$\boxed{\begin{cases}
+Ax + By + C = 0\\
+A^2 + B^2 \neq 0
+\end{cases}}\eqno(8)$$
+
+\begin{theorem}{(Геометрический смысл коэффициентов в общем уравнении прямой)}
+
+В уравнении прямой $Ax + By + C = 0$ вектор $\left(A,\ B\right)$ --- перпендикуляр к прямой, то есть $\left(A,\ B\right) = \vec n$.
+\begin{proof}
+Пусть $(x_1,\ y_1)$ и $(x_2,\ y_2)$ --- точки на нашей прямой.
+
+$\begin{vmatrix}
+Ax_1 + By_1 + C = 0 \textrm{ --- верно }\\
+Ax_2 + By_2 + C = 0 \textrm{ --- верно }
+\end{vmatrix}$
+
+$A(x_2 - x_1) + B(y_2 - y_1) = 0$
+Если базис <<хороший>>, то это расписано скалярное произведение\\ $\left( \left(A,\ B\right),\ (x_2 - x_1,\ y_2 - y_1)\right)$ по критерию ортогональности $\left(A,\ B\right)\ \bot\ (x_2 - x_1,\ y_2 - y_1)$
+
+$\left(A,\ B\right)\ \bot\ L$
+\end{proof}
+\end{theorem}
+
+\subsubsection*{Несколько стандартных задач про прямые на плоскости}
+
+\begin{exercise}
+Найти угол между двумя прямыми.
+\begin{solution}{}
+а) Для школьных уравнений
+\newline
+    1) $y = k_1x + b_1$\newline
+    2) $y = k_2x + b_2$\newline
+$\tg{\alpha} = \tg{(\alpha_2 - \alpha_1)} = \dfrac{k_2 - k_1}{1 + k_1k_2}$
+
+Если $1 + k_1k_2 = 0 \Longrightarrow k_1 = -\dfrac{1}{k_2}$ тогда $\tg{\alpha}$ не существует $\Longrightarrow\ \alpha = \dfrac{\pi}{2}$. Другими словами $k_1 = -\dfrac{1}{k_2} \Longleftrightarrow $ прямые перпендикулярны.
+
+б) Для общих уравнений\newline
+    \RomanNumeralCaps 1 ) $A_1x + B_1y + C_1 = 0$\newline
+    \RomanNumeralCaps 2 ) $A_2x + B_2y + C_2 = 0$\newline
+$\angle(\textrm{\RomanNumeralCaps 1},\ \textrm{\RomanNumeralCaps 2}) =  \angle(\vec n_1,\ \vec n_2)$
+
+$\cos{\angle(\vec n_1,\ \vec n_2))} = \dfrac{(\vec n_1,\ \vec n_2)}{|\vec n_1||\vec n_2|}$
+
+В <<хорошей>> системе получается
+
+$\cos{\angle(\vec n_1,\ \vec n_2))} = \dfrac{\left(\left(A_1,\ B_1\right),\ \left(A_2,\ B_2\right)\right)}{|\left(A_1,\ B_1\right)| |\left(A_2,\ B_2\right)|} = \dfrac{A_1A_2 + B_1B_2}{\sqrt{A_1^2 + B_1^2}\cdot\sqrt{A_2^2 + B_2^2}}$
+
+в) Для канонических уравнений\newline
+    \RomanNumeralCaps 1 ) $\dfrac{x - x_0 }{a_1} = \dfrac{y - y_0 }{b_1}$\newline
+    \RomanNumeralCaps 2 ) $\dfrac{x - x_0'}{a_2} = \dfrac{y - y_0'}{b_2}$\newline
+    
+$\cos(\angle((a_1,\ b_1),\ (a_2,\ b_2)) = \dfrac{\left((a_1,\ b_1),\ (a_2,\ b_2)\right)}{|(a_1,\ b_1)| |(a_2,\ b_2)|} = \dfrac{a_1a_2 + b_1b_2}{\sqrt{a_1^2 + b_1^2}\cdot\sqrt{a_2^2 + b_2^2}}$
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Найти расстояние от точки до прямой.
+\begin{solution}{}
+Пусть прямая задана векторным уравнением. $[\vec r - \vec r_0,\ \vec a] = \vec 0$. Найдём площадь двумя способами.
+
+$S = d\cdot |\vec a| = \left| \left[\overrightarrow{R} - \overrightarrow{r_0},\ \vec a \right]\right| = \left|\overrightarrow{R} - \vec r_0 \right|\cdot |\vec a|\cdot\sin{\alpha}$
+
+Пусть система координат <<хорошая>> и прямая задана общим уравнением
+$Ax + By + C = 0$
+
+$\left(A,\ B\right) = \vec n\ \Longrightarrow\ \vec a = \left(B,\ -A\right) \textrm{, так как } A\cdot B + B\cdot(-A) = 0 \textrm{ то есть } \left(B,\ -A\right)\ \bot\ \left(A,\ B\right)$
+
+$$d = \dfrac{\left|\left[\overrightarrow{R}-\vec r_0,\ \vec a \right] \right|}{|\vec a|} = \dfrac{\left|AX + BY + C\right|}{\sqrt{A^2 + B^2}}\quad \eqno(*)$$
+
+$$\overrightarrow{R} - \vec r_0 = \left( X - x_0,\ Y - y_0 \right)$$
+Числитель в (*) равен $\left|\left[\left(X - x_0,\ Y - y_0\right),\ \left(-B,\ A\right) \right]\right| = 
+\begin{vmatrix}
+\vec i & \vec j & \vec k \\
+X-x_0  & Y-y_0  & 0      \\
+-B     & A      & 0
+\end{vmatrix} = \left|\vec k\left(\left(X - x_0\right)A + \left(Y - y_0\right)B  \right) \right| = \left|A\left(X-x_0\right) + B\left(Y-y_0\right)\right| = \left|AX + BY - \left( Ax_0 + By_0\right) \right| \stackrel{(x_0,\ y_0)\in L\quad Ax_0+By_0+C=0}{=} \left|AX + BY + C\right|$
+
+Таким образом, чтобы найти расстояние от точки до прямой, достаточно подставить координаты этой точки в общее уравнение прямой, взять полученное число по модулю и поделить на корень квадратный из суммы коэффициентов при $x$ и $y$.
+\end{solution}
+\end{exercise}
+
+\subsection{Нормальное уравнение прямой}
+$$\boxed{\dfrac{Ax + By + C}{\sqrt{A^2 + B^2}} = 0}\eqno(9)$$
+
+\begin{remark}
+Проверить, что $d = \dfrac{|[\vec R - \vec r_0,\ \vec n]|}{|\vec n|}$
+\end{remark}
+
+
+
+\section{Уравнение плоскости в пространстве}
+
+\subsection{Векторное параметрическое}
+
+\textit{Даны:} $\vec p \parallel P,\quad \vec q \parallel P,\quad \vec p \nparallel \vec q,\quad M_0\in P$
+
+Векторы $\vec r - \vec r_0,\quad \vec p,\quad \vec q$ --- линейно зависимы, а $\vec p$ и $\vec q$ --- линейно независимы. Поэтому $\vec r - \vec r_0$ есть линейная комбинация второго и третьего.
+$\vec r - \vec r_0 = u\vec p + v\vec q$
+$$\boxed{\vec r = u\vec p + v\vec q + \vec r_0\quad u,v\in\mathbb{R}}\eqno(1)$$
+
+\subsection{Параметрическое уравнение}
+
+$$\boxed{\begin{cases}
+x = x_0 + up_1 + vq_1 & \vec r_0 = (x_0,\ y_0,\ z_0) \\
+y = y_0 + up_2 + vq_2 & \vec p   = (p_1,\ p_2,\ p_3) \\
+z = z_0 + up_3 + vq_3 & \vec q   = (q_1,\ q_2,\ q_3)
+\end{cases}}\eqno(2)$$
+
+\subsection{Векторное уравнение}
+
+Зададим плоскость нормальным вектором $\vec n$ и точкой $M_0\ (x_0,\ y_0,\ z_0)$.  Значит $\vec n \bot \overrightarrow{MM_0}\ \forall M\in P$.\\
+$\vec n \bot (\vec r - \vec r_0)\ \forall \vec r$ --- радиус-вектор точки плоскости
+
+$$\boxed{(\vec r - \vec r_0,\ \vec n) = 0}\eqno(3)$$
+
+\subsection{Общее уравнение плоскости}
+
+Пусть система координат <<хорошая>>. Распишем последнее скалярное произведение.
+
+$\left( (x - x_0,\ y - y_0,\ z - z_0),\ \left(A,\ B,\ C\right)\right) = Ax + By + Cz + \underbrace{ (-1)\cdot(Ax_0 + By_0 + Cz_0)}_{D} = 0$
+
+$$\boxed{
+\begin{matrix}
+Ax + By + Cz + D = 0 \\
+A^2 + B^2 + C^2 > 0
+\end{matrix}}\eqno(4)$$
+
+\subsection{Уравнение плоскости через 3 точки}
+
+Пусть $M,\ M_1,\ M_2,\ M_3\in P$. Векторы $\overrightarrow{MM_1},\ \overrightarrow{M_2M_1},\ \overrightarrow{M_3M_1}$ --- компланарны по построению $\Longleftrightarrow\ (\overrightarrow{MM_1},\ \overrightarrow{M_2M_1},\ \overrightarrow{M_3M_1}) = 0$
+
+$$\boxed{(\overrightarrow{MM_1},\ \overrightarrow{M_2M_1},\ \overrightarrow{M_3M_1}) = \begin{vmatrix}
+x - x_1 & y - y_1 & z - z_1 \\
+x_2 - x_1 & y_2 - y_1 & z_2 - z_1 \\
+x_3 - x_1 & y_3 - y_1 & z_3 - z_1
+\end{vmatrix} = 0}\eqno(5)$$
+
+\subsection{Уравнение плоскости в отрезках}
+
+$$\begin{vmatrix}
+x - a & y - 0 & z - 0 \\
+0 - a & b - 0 & 0 - 0 \\
+0 - a & 0 - 0 & c - 0
+\end{vmatrix} = 0$$
+
+$$\begin{vmatrix}
+x - a & y & z \\
+  - a & b & 0 \\
+  - a & 0 & c
+\end{vmatrix} = (x - a)bc + abz + acy = 0$$
+
+$$x\underline{bc} + y\underline{ac} + z\underline{ab} - \underline{abc} = 0\quad | : abc \neq 0 $$
+
+$$\boxed{\dfrac{x}{a} + \dfrac{y}{b} + \dfrac{z}{c} = 1}\eqno(6)$$
+
+\subsection{Второй вид векторного уравнения}
+
+Пусть $\vec p \nparallel \vec q$ --- направляющие векторы плоскости
+
+$\vec n = [\vec p,\ \vec q]$, из первого вида имеем:
+
+$(\vec r - \vec r_0,\ [\vec p,\ \vec q]) = 0$
+
+$$\boxed{(\vec r - \vec r_0,\ \vec p, \vec q) = 0}\eqno(7)$$
+
+\begin{exercise}
+Найти расстояние от точки до плоскости.
+\begin{solution}{1}
+$V_{\Pi} = \left| \left(\overrightarrow{R} - \vec r_0,\ \vec p,\ \vec q \right) \right| = h\cdot S_{\textrm{осн}}$
+
+$\left| \left(\overrightarrow{R} - \vec r_0,\ \vec p,\ \vec q \right) \right| = h\cdot \left|[\vec p,\ \vec q]\right|$
+
+$h = \dfrac{\left| \left(\overrightarrow{R} - \vec r_0,\ \vec p,\ \vec q \right) \right|}{\left|[\vec p,\ \vec q]\right|}$. Пусть теперь $P$ задана общим уравнением $Ax + By + Cz + D = 0\quad \vec n = (A,\ B,\ C),\quad \vec r_0 = (x_0,\ y_0,\ z_0)$, оказывается:
+$h = \dfrac{\left| \left(\overrightarrow{R} - \vec r_0,\ \vec n \right) \right|}{|\vec n|}$. Пусть система координат <<хорошая>>.
+
+
+\begin{multline}
+    h = \dfrac{\left|\left( \left(X - x_0,\ Y - y_0,\ Z - z_0 \right),\ \left(A,\ B,\ C\right)\right)\right|}{\sqrt{A^2 + B^2 + C^2}} = \dfrac{\left| \left(X - x_0\right)A + \left(Y - y_0\right)B + \left(Z - z_0\right)C \right|}{\sqrt{A^2 + B^2 + C^2}} =\\
+    =\dfrac{\left|AX + BY + CZ \left(Ax_0 + By_0 + Cz_0\right) \right|}{\sqrt{A^2 + B^2 + C^2}}
+\end{multline}
+
+
+
+\begin{remark}
+$(x_0,\ y_0,\ z_0)\in P \Longrightarrow D = - (Ax_0 + By_0 + Cz_0)$
+\end{remark}
+
+$$\boxed{h = \dfrac{\left|AX + BY + CZ + D\right|}{\sqrt{A^2 + B^2 + C^2}}}$$
+ 
+Расстояние найдено!
+\end{solution}
+\end{exercise}
+
+\subsection{Нормальное уравнение плоскости}
+
+$$\boxed{\dfrac{Ax + By + Cz + D}{\sqrt{A^2 + B^2 + C^2}} = 0}\eqno(8) $$
+$\cos{\alpha} = \dfrac{A}{\sqrt{A^2 + B^2 + C^2}}$\\ 
+$\cos{\beta}  = \dfrac{B}{\sqrt{A^2 + B^2 + C^2}}$\\
+$\cos{\gamma} = \dfrac{C}{\sqrt{A^2 + B^2 + C^2}}$\\
+ 
+$$\boxed{x\cos{\alpha} + y\cos{\beta} + z\cos{\gamma} + d = 0}$$
+Направляющие косинусы нормального вектора.
+
+
+
+
+\section{Прямая в пространстве}
+
+\subsection{Векторное параметрическое уравниние}
+
+$(\vec r - \vec r_0) \parallel \vec a\ \Longleftrightarrow \vec r - \vec r_0 = t\vec a$
+
+$$\boxed{\vec r = \vec r_0 + t\vec a\quad t\in\mathbb{R}} \eqno(1)$$
+
+\subsection{Параметрическое уравнение}
+
+$$\boxed{\begin{cases}
+x = x_0 + ta_1 \\
+y = y_0 + ta_2 \\
+z = z_0 + ta_3
+\end{cases}\quad t\in\mathbb{R}} \eqno(2)$$
+
+\subsection{Векторное уравнение}
+
+$$\vec r - \vec r_0 \parallel \vec a \Longleftrightarrow \boxed{[\vec r - \vec r_0,\ \vec a] = \vec 0} \eqno(3)$$
+
+\subsection{Каноническое уравнение}
+
+Из (2) получаем $t$:
+
+$$\boxed{\dfrac{x - x_0}{a_1} = \dfrac{y - y_0}{a_2} = \dfrac{z - z_0}{a_3}} \eqno(4)$$
+
+$(x_0,\ y_0,\ z_0)$ --- начальная точка
+
+$(a_1,\ a_2,\ a_3)$ --- направляющий вектор
+
+\begin{remark}
+Сколько здесть уравнений?
+
+Здесь два (независимых) уравнения.
+\end{remark}
+
+\subsection{Уравнение через две точки}
+
+Здесь можно считать, что направляющий вектор $\vec a = \vec r_1 - \vec r_0$:
+
+$$\boxed{\dfrac{x - x_0}{x_1 - x_0} = \dfrac{y - y_0}{y_1 - y_0} = \dfrac{z - z_0}{z_1 - z_0}}\eqno(5)$$
+
+\subsection{Общее уравнение}
+
+$$\boxed{\begin{matrix}
+\begin{cases}
+A_1x + B_1y + C_1z + D_1 = 0 \\
+A_2x + B_2y + C_2z + D_2 = 0
+\end{cases}\\
+\left(A_1,\ B_1,\ C_1\right)\nparallel \left(A_2,\ B_2,\ C_2\right)
+\end{matrix}}\eqno(6)$$
+
+То есть $\left[\left(A_1,\ B_1,\ C_1\right),\ \left(A_2,\ B_2,\ C_2\right)\right] \neq \vec 0$
+
+Если система координат ортонормированна, это условие имеет вид:
+
+$\vec 0 \neq \begin{vmatrix}
+\vec i & \vec j & \vec k \\
+A_1 & B_1 & C_1 \\
+A_1 & B_2 & C_2
+\end{vmatrix} \Longrightarrow 0 \neq 
+\begin{vmatrix}
+B_1 & C_1\\
+B_2 & C_2
+\end{vmatrix}^2 + 
+\begin{vmatrix}
+A_1 & C_1 \\
+A_2 & C_2
+\end{vmatrix}^2 + 
+\begin{vmatrix}
+A_1 & B_1 \\
+A_2 & B_2
+\end{vmatrix}^2$
+
+\begin{exercise}
+Переход от общего уравнения и обратно.
+\begin{solution}{1}
+Каноническое --> Общее. Тривиально.
+
+Если дано: $\dfrac{x - x_0}{a_1} = \dfrac{y - y_0}{a_2} = \dfrac{z - z_0}{a_3}$, то пишем
+
+$$\begin{cases}
+\dfrac{x - x_0}{a_1} = \dfrac{y - y_0}{a_2} \\
+\dfrac{x - x_0}{a_1} = \dfrac{z - z_0}{a_3}
+\end{cases}$$
+\end{solution}
+\begin{solution}{2}
+В качестве направляющего вектора $\vec a = (a_1,\ a_2,\ a_3)$ можно взять $[\vec n_1,\ \vec n_2] = \left[\left(A_1,\ B_1,\ C_1\right),\ \left(A_2,\ B_2,\ C_2\right) \right]$
+
+Точка $(x_0,\ y_0,\ z_0)$ подбирается. Например: пусть $z_0 = const$, подставим в (6) и решим систему относительно $x$ и $y$.
+\end{solution}
+\end{exercise}
+
+\section{Расстояние между скрещивающимися прямыми}
+
+\begin{exercise}
+Найдём расстояние.
+\begin{solution}
+Посчитаем объём параллилепипеда разными способами. Рассмотрим параллилепипед на векторах $\vec a_1,\ \vec a_2,\ \vec r_2 - \vec r_1$:
+
+$$V_{\Pi(\vec a_1,\ \vec a_2,\ \vec r_2 - \vec r_1)} = hS_{\textrm{осн}} = \left|(\vec a_1,\ \vec a_2,\ \vec r_2 - \vec r_1)\right|$$
+
+$$h = \dfrac{\left|(\vec a_1,\ \vec a_2,\ \vec r_2 - \vec r_1)\right|}{\left|[\vec a_1,\ \vec a_2]\right|}$$
+
+\begin{remark}
+Равенство нулю числителя в последней формуле (при условии неравенства нулю знаменателя) --- критерий пересечения прямых в пространстве.
+$(\left|(\vec a_1,\ \vec a_2,\ \vec r_2 - \vec r_1)\right|) = 0$
+\end{remark}
+
+\begin{remark}
+Даны две скрещивающиеся прямые:
+$$\begin{matrix}
+(1)\quad \vec r = \vec r_1 + t\vec a_1\\
+(2)\quad \vec r = \vec r_2 + t\vec a_2
+\end{matrix}$$
+
+Требуется написать уравнение плоскости, содержащей прямую (1) и паралельную прямой (2).
+
+Ответ: $((\vec a_1,\ \vec a_2,\ \vec r_2 - \vec r_1)) = 0$
+\end{remark}
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Найти угол между прямой и плоскостью.
+\begin{solution}{}
+$\alpha = 90^{\circ} - \beta$, где $\alpha$ --- угол между прямой и плоскостью $\alpha = \angle (l,\ \omega)$. $\beta$ --- угол между двумя прямыми. Найдём через скалярное произведение.
+\end{solution}
+\end{exercise}
+
+\begin{exercise}
+Написать уравнение общего перепендикуляра к двум скрещивающимся прямым.
+$$\begin{matrix}
+(1)\quad \vec r = \vec r_1 + t\vec a_1 \\
+(2)\quad \vec r = \vec r_2 + t\vec a_2
+\end{matrix}$$
+\begin{solution}
+Направляющий вектор общего перпендикуляра $\vec p = [\vec a_1,\ \vec a_2]$. Плоскость $(\vec r - \vec r_1,\ \vec a_1,\ [\vec a_1,\ \vec a_2]) = 0$. Значит эти векторы компланарны.
+
+$\vec a_1 \parallel  $ плоскости;
+
+$[\vec a_1,\ \vec a_2]\ \parallel\ \textrm{общий перепендикуляр}$;
+
+Это плоскость $\Pi_1$;
+
+Аналогично $(\vec r - \vec r_2,\ \vec a_2,\ [\vec a_1,\ \vec a_2]) = 0$ --- уравнение плоскости $\Pi_2$
+\textbf{Ответ: } $\begin{cases}
+(\vec r - \vec r_1,\ \vec a_1,\ [\vec a_1,\ \vec a_2]) = 0 \\
+(\vec r - \vec r_2,\ \vec a_2,\ [\vec a_1,\ \vec a_2]) = 0
+\end{cases}$ для всех систем координат.
+\end{solution}
+\end{exercise}
+
+\section{Пучки и связки}
+
+\begin{definition}
+\textbf{Пучком прямых } на плоскости называется множество всех прямых этой плоскости, проходящих через заданную точку, которая называется центром пучка.
+\end{definition}
+
+$y - y_0 = k(x - x_0)$
+$\forall k$ такая прямая проходит через точку $(x_0,\ y_0)$. Таким образом, первый вид задания пучка прямых такой:
+
+пучок = множество прямых
+
+Пучок = $\{y - y_0 = k(x - x_0)\ |\ k\in \mathbb{R}\}\cup \{x = x_0\}$
+
+Рассмотрим вторую форму уравнения пучка прямых на плоскости:
+
+Центр пучка (то есть сам пучок) задаётся парой прямых, которые не параллельны.
+
+$$\begin{matrix}
+A_1x + B_1y + C_1 = 0\quad (1)\\
+A_2x + B_2y + C_2 = 0\quad (2)\\
+\end{matrix}$$
+
+$$\left(A_1,\ B_1\right) \nparallel \left(A_2,\ B_2\right)$$
+
+$\dfrac{A_1}{A_2} \neq \dfrac{B_1}{B_2} \Longleftrightarrow A_1B_2 - A_2B_1\neq 0 \Longleftrightarrow \left[\left(A_1,\ B_1\right),\ \left(A_2,\ B_2\right)\right] \neq \vec 0$
+
+\begin{theorem}
+Уравнение пучка, определяемого парой пересекающихся прямых --- это
+$$ (*)\quad \lambda\left(A_1x + B_1y + C_1\right) + \mu\left(A_2x + B_2y + C_2\right) = 0,\quad \lambda^2 + \mu^2 > 0$$
+
+\begin{proof}
+1) (*) --- уравнение степени 1, то есть при любых $\lambda$ и $\mu$ определяет прямую.
+
+2) При любых $\lambda$ и $\mu$ прямая (*) проходит через центр пучка $(x_0,\ y_0)$, так как $(x_0,\ y_0)$ каждую круглую скобку в (*) обращает в нуль.
+
+Если (*) при каких-то $\lambda$ и $\mu$ вдруг получилось степени $0$, то это означает, что $\lambda A_1 + \mu A_2 = 0$ и $\lambda B_1 + \mu B_2 = 0$, это --- однородная система.
+$\Delta = \begin{vmatrix}
+A_1 & A_2\\
+B_1 & B_2
+\end{vmatrix} = A_1B_2 - A_2B_1 \neq 0 \Longrightarrow $ единственное решение --- $\lambda = \mu = 0$, но это невозможно в (*)
+
+3) Надо доказать, что \underline{любая} прямая из нашего пучка задаётся уравнением (*) при подходящих $\lambda$ и $\mu$.
+
+Пусть $M_1\ (x_1,\ y_1)$ --- любая точка плоскости отличная от $M_0 (x_0,\ y_0)$. Прямая $M_0M_1$ принадлежит пучку. Покажем, как выбрать нужные $\lambda$ и $\mu$ в (*). Подставим координаты точки $M_1$ в (*):
+
+$$\lambda\left(A_1x_1 + B_1y_1 + C_1\right) + \mu\left(A_2x_1 + B_2y_1 + C_2\right) = 0$$
+
+Так как $M_1\neq M_0$, то $\left(A_1x_1 + B_1y_1 + C_1\right)^2 + \left(A_2x_1 + B_2y_1 + C_2\right)^2 > 0$. Положим 
+$$\begin{matrix}
+\lambda = - \left(A_2x_1 + B_2y_1 + C_2\right)^2 \\
+\mu = \left(A_1x_1 + B_1y_1 + C_1\right)^2
+\end{matrix}$$
+(*) примет вид $-\left(A_2x_1 + B_2y_1 + C_2\right)\left(A_1x + B_1y + C_1\right)  + \left(A_1x_1 + B_1y_1 + C_1\right)\left(A_2x + B_2y + C_2\right) = 0$
+
+Точка $M_1$ удовлетворяет этому уравнению. Точка $M_0$ тоже удовлетворяет.
+\end{proof}
+\end{theorem}
+
+\begin{remark}
+Если прямые (1) и (2) выбраны параллельно осям координат, то уравнение пучка будет проще:
+$$\boxed{\lambda(y - y_0) = \mu(x - x_0)}$$
+\end{remark}
+
+\begin{definition}
+\textbf{Пучком плоскостей} называется множество всех плоскостей, проходящих через данную прямую.
+\end{definition}
+
+\begin{theorem}
+Уравнение пучка:
+$$\begin{cases}
+\lambda\left(A_1x + B_1y + C_1z + D_1\right) + \mu\left(A_2x + B_2y + C_2z + D_2\right) = 0\\
+\lambda^2 + \mu^2 > 0 \\
+[\vec n_1,\ \vec n_2] \neq \vec 0
+\end{cases}$$
+\begin{proof}
+Аналогично.
+\end{proof}
+\end{theorem}
+
+\begin{definition}
+\textbf{Связка плоскостей } в пространстве --- это множество всех плоскостей, проходящих через данную точку.
+\end{definition}
+
+Пусть точка (центр связки) задаётся пересечением трёх плоскостей:
+$$\begin{matrix}
+A_1x + B_1y + C_1z + D_1 = 0\\
+A_2x + B_2y + C_2z + D_2 = 0\\
+A_3x + B_3y + C_3z + D_3 = 0
+\end{matrix}\qquad
+\begin{vmatrix}
+A_1 & B_1 & C_1 \\
+A_2 & B_2 & C_2 \\
+A_3 & B_3 & C_3
+\end{vmatrix} \neq 0$$
+
+Определитель системы не равен 0. $\Longleftrightarrow$ Векторы (нормальные) некомпланарны.
+
+\begin{theorem}
+Уравнение связки:
+$$\begin{matrix}
+\alpha\left(A_1x + B_1y + C_1z + D_1\right) + \beta\left(A_2x + B_2y + C_2z + D_2\right) + \gamma\left(A_3x + B_3y + C_3z + D_3\right) = 0\\
+\alpha^2 + \beta^2 + \gamma^2 > 0
+\end{matrix}$$
+\begin{proof}
+Аналогично.
+\end{proof}
+\end{theorem}
+
+\section{Замены базиса и пересчёт координат}
+
+Пусть $\begin{matrix}
+\{\vec e_1,\ \vec e_2,\ \vec e_3\} \textrm{ --- <<старый>> базис}\\
+\{\overrightarrow{e_1}',\ \overrightarrow{e_2}',\ \overrightarrow{e_3}'\} \textrm{ --- <<новый>> базис}
+\end{matrix}$
+
+$$\begin{cases}
+\overrightarrow{e_1}' = a_{11}\vec e_1 + a_{21}\vec e_2 + a_{31}\vec e_3\\
+\overrightarrow{e_2}' = a_{12}\vec e_1 + a_{22}\vec e_2 + a_{32}\vec e_3\\
+\overrightarrow{e_3}' = a_{13}\vec e_1 + a_{23}\vec e_2 + a_{33}\vec e_3
+\end{cases}\eqno(1)$$
+Пусть $\vec a\in\mathbb{R}^3$ --- произвольный вектор.
+
+$$\overrightarrow{a} = \alpha_1\overrightarrow{e_1} + \alpha_2\overrightarrow{e_2} + \alpha_3\overrightarrow{e_3} \textrm{ в старом}\eqno(2)$$
+$$\overrightarrow{a} = \alpha_1'\overrightarrow{e_1}' + \alpha_2'\overrightarrow{e_2}' + \alpha_3'\overrightarrow{e_3}' \textrm{ в новом}\eqno(3)$$
+
+Подставим в (3) выражение (1)
+\begin{multline}
+\overrightarrow{a} = \alpha_1'(a_{11}\overrightarrow{e_1} + a_{21}\overrightarrow{e_2} + a_{31}\overrightarrow{e_3}) + 
+\alpha_2'(a_{12}\overrightarrow{e_1} + a_{22}\overrightarrow{e_2} + a_{32}\overrightarrow{e_3}) + \\ +
+\alpha_3'(a_{13}\overrightarrow{e_1} + a_{23}\overrightarrow{e_2} + a_{33}\overrightarrow{e_3}) = 
+(\alpha_1'a_{11} + \alpha_2'a_{12} + \alpha_3'a_{13})\overrightarrow{e_1} + \\ + (\alpha_1'a_{21} + \alpha_2'a_{22} + \alpha_3'a_{23})\overrightarrow{e_2} +  (\alpha_1'a_{31} + \alpha_2'a_{32} + \alpha_3'a_{33})\overrightarrow{e_3}
+\end{multline}
+
+В силу единственности разложения по данному базису (здесь по <<старому>>) имеем:
+
+$$\begin{cases}
+\alpha_1 = a_{11}\alpha_1' + a_{12}\alpha_2' + a_{13}\alpha_3' \\
+\alpha_2 = a_{21}\alpha_1' + a_{22}\alpha_2' + a_{23}\alpha_3' \\
+\alpha_3 = a_{31}\alpha_1' + a_{32}\alpha_2' + a_{33}\alpha_3'
+\end{cases}\eqno(4)$$
+
+\begin{definition}
+Матрица
+$$T = \begin{pmatrix}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33}
+\end{pmatrix}$$
+$k$-й \fbox{{\Huge столбец}} которой составлен из координат $k$-ого нового базисного вектора в старом базисе, называется \textbf{матрицей перехода от старого базиса к новому}.
+
+\underline{Определение без слов: }
+$$(\overrightarrow{e_1}',\ \overrightarrow{e_2}',\ \overrightarrow{e_3}') = (\overrightarrow{e_1},\ \overrightarrow{e_2},\ \overrightarrow{e_3})\cdot T\eqno(1)$$
+\end{definition}
+
+\underline{\textbf{Пересчёт координат векторов: }}
+$$\begin{pmatrix}
+\alpha_1\\
+\alpha_2\\
+\alpha_3
+\end{pmatrix} = T\cdot 
+\begin{pmatrix}
+\alpha_1'\\
+\alpha_2'\\
+\alpha_3'
+\end{pmatrix}\eqno(4)$$
+
+\section{Замена системы координат}
+\subsection{Общий случай}
+
+$\{O,\ \overrightarrow{e_1},\ \overrightarrow{e_2,\ \overrightarrow{e_3}}\}$ --- <<старая>> система координат
+
+$\{O',\ \overrightarrow{e_1}',\ \overrightarrow{e_2}',\ \overrightarrow{e_3}'\}$ --- <<новая> система координат
+
+Пусть $M$ --- произвольная точка. Её координаты --- координаты её радиус-вектора. Пусть в <<старой>> радиус-вектор $\overrightarrow{OM}$, обозначим $(x,\ y,\ z)$, а в <<новой>> радиус-вектор $\overrightarrow{O'M}$ обозначим $(x',\ y',\ z')$
+
+$\overrightarrow{OM} = \overrightarrow{OO'} + \overrightarrow{O'M}$. Пусть $O'$ имеет координаты $(a_1^0,\ a_2^0,\ a_3^0)$ в старой системе координат.
+
+$$\overrightarrow{OM} = \overrightarrow{OO'} + x'\overrightarrow{e_1'} + y'\overrightarrow{e_2'} + z'\overrightarrow{e_3}'\eqno(5)$$
+В (5) разложим все векторы по исходному базису $\{\overrightarrow{e_1},\ \overrightarrow{e_2,\ \overrightarrow{e_3}}\}$
+
+$$\begin{cases}
+x = a_1^0 + a_{11}x' + a_{12}y' + a_{13}z'\\
+y = a_2^0 + a_{21}x' + a_{22}y' + a_{23}z'\\
+z = a_3^0 + a_{31}x' + a_{32}y' + a_{33}z'
+\end{cases}\eqno(7)$$
+
+$$\underbrace{\begin{pmatrix}
+x\\
+y\\
+z
+\end{pmatrix}}_{\textrm{старые}} = T
+\underbrace{\begin{pmatrix}
+x'\\
+y'\\
+z'
+\end{pmatrix}}_{\textrm{новые}} + 
+\begin{pmatrix}
+a_1^0\\
+a_2^0\\
+a_3^0
+\end{pmatrix}$$
+
+\subsection{Поворот прямоугольной системы на плоскости.}
+\textbf{\large (Важный частный случай)}
+\\
+
+$T = \begin{pmatrix}
+\cos{\alpha} & -\sin{\alpha}\\
+\sin{\alpha} &  \cos{\alpha}
+\end{pmatrix}$ --- матрица поворота
+
+$$\overrightarrow{e_1}' = \cos{\alpha}\cdot\overrightarrow{e_1} + \sin{\alpha}\cdot\overrightarrow{e_2}$$
+
+$$\overrightarrow{e_2}' = -\sin{\alpha}\cdot\overrightarrow{e_1} + \cos{\alpha}\cdot\overrightarrow{e_2}$$
+
+Пересчёт координат при повороте:
+
+$$\begin{pmatrix}
+x\\
+y
+\end{pmatrix} = 
+\begin{pmatrix}
+\cos{\alpha} & -\sin{\alpha}\\
+\sin{\alpha} &  \cos{\alpha}
+\end{pmatrix}\cdot
+\begin{pmatrix}
+x'\\
+y'
+\end{pmatrix}$$
+
+$$\begin{cases}
+x = x'\cos{\alpha} - y'\sin{\alpha}\\
+y = x'\sin{\alpha} + y'\cos{\alpha}
+\end{cases}$$
+
+\section{Кривые степени два. (Кривые второго порядка)}
+
+\begin{definition}
+\textbf{Кривой степени два } называется множество точек с координатами $(x,\ y)$, удовлетворяющих уравнению
+$$Ax^2 + 2Bxy + Cy^2 + 2Dx + 2Ey + F = 0,\quad A^2 + B^2 + C^2 > 0\eqno(1)$$
+\end{definition}\label{def_cur_pow2_1}
+
+\begin{theorem}\label{turn_1}
+С помощью поворота системы координат коэффициент при произведении переменных в (1) можно сделать равным нулю.
+\begin{proof}
+ Будем подбирать в формулах поворота угол $\varphi$ так, чтобы коэффициент при $x'y'$ был равен нулю.
+ $$\begin{cases}
+ x = x'\cos{\varphi} - y'\sin{\varphi}\\
+ y = x'\sin{\varphi} + y'\cos{\varphi}
+ \end{cases}$$
+
+$$A(x'\cos{\varphi} - y'\sin{\varphi})^2 + 2B(x'\cos{\varphi} - y'\sin{\varphi})(x'\sin{\varphi} + y'\cos{\varphi}) + C(x'\sin{\varphi} + y'\cos{\varphi})^2 \dots + F = 0$$
+
+Выпишем коэффициенты при $x'y'\ (x'y' = 0)$ 
+$$-2A\cos{\varphi}\sin{\varphi} + 2B(\cos^2{\varphi})\sin^2{\varphi} + 2C\sin\varphi\cos\varphi = 0$$
+$$2B' = 2B\cos{2\varphi} - (A-C)\sin{2\varphi} = 0$$
+$$2B\cos{2\varphi} = (A - C)\sin{2\varphi}$$
+\begin{itemize}
+    \item Если $B = 0$, то можно взять $\varphi = 0$
+    \item Если $A = C$, то можно взять $\varphi = \dfrac{\pi}{4}$
+    \item Если $A\neq C$, то $\cos2\varphi\neq 0$, можно делить $\tg{2\varphi}= \dfrac{2B}{A - C}$, то есть $\varphi = \dfrac{1}{2}\arctg{\dfrac{2B}{A-C}}$
+\end{itemize}
+\end{proof}
+\end{theorem}
+
+\begin{theorem}\label{shift_2}
+Если в уравнении
+$$Ax^2 + Cy^2 + 2Dx + 2Ey + F = 0$$
+коэффициент при квадрате переменной не нуль, то коэффициент при первой степени этой переменной можно сделать нулём с помощью сдвига начала координат.
+\begin{proof}
+Пусть $A\neq 0$ и $D\neq 0$. Выделим из $Ax^2 + Dx$ полный квадрат:
+$$Ax^2 + 2Dx = A\left(x^2 + 2\dfrac{D}{A}x\right) = A\left(x^2 + 2x\dfrac{D}{A} + \left(\dfrac{D}{A}\right)^2 \right) - \left(\dfrac{D}{A}\right) = A\left(\underbrace{x + \dfrac{D}{A}}_{x'}\right)^2 - \left(\dfrac{D}{A}\right)^2 = A(x')^2 - \left(\dfrac{D}{A}\right)^2$$
+\end{proof}
+\end{theorem}
+
+
+1. В силу теоремы \ref{turn_1}\ будем считать, что $B=0$. Имеем:
+$$Ax^2 + Cy^2 + 2Dx + 2Ey + F = 0\eqno(2)$$
+
+2. Пусть $AC \neq 0$ в (2). Тогда в силу теоремы \ref{shift_2} можно считать, что $D = 0$ и $E = 0$. Уравнение примет вид:
+$$Ax^2 + Cy^2 + F = 0$$
+
+    2.1 $AС > 0,\quad ACF < 0$. Для определённости пусть $A > 0,\quad C > 0,\quad F < 0$.
+        Тогда поделим:
+        $$Ax^2 + C^y2 = - F\quad |\ : (-F)$$
+        $$ \dfrac{x^2}{-\frac{F}{A}} + \dfrac{y^2}{-\frac{F}{C}} = 1$$
+        $\dfrac{-F}{A} > 0$ можем обозначить $\dfrac{-F}{A} = a^2$\\
+        $\dfrac{-F}{C} > 0$ можем обозначить $\dfrac{-F}{C} = b^2$
+    
+    $$\boxed{\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = 1}\eqno(3)$$
+
+    \begin{definition}
+    Линия, которая в некоторой системе координат задаётся уравнением (3) называется \textbf{эллипсом}, а уравнение (3) --- \textbf{ каноническим уравнением эллипса}.
+    \end{definition}
+    
+    2.2 $AC > 0,\quad ACF>0$ все одного знака. Для определённости $A > 0,\quad C > 0,\quad F > 0$.
+        $$Ax^2 + Cy^2 = - F\quad | : (-F)$$
+        $$\dfrac{x^2}{\frac{F}{A}} + \dfrac{y^2}{\frac{F}{C}} = -1$$
+        $\dfrac{F}{A} = a^2 > 0$\\
+        $\dfrac{F}{C} = b^2 > 0$
+        
+    $$\boxed{\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = -1}\eqno(4)$$
+    
+    \begin{definition}
+    Линия, которая в некоторой системе координат задаётся уравнением (4) называется \textbf{мнимым эллипсом}, а уравнение (4) --- \textbf{ каноническим уравнением мнимого эллипса}.
+    \end{definition}
+    
+    2.3 $AC > 0,\quad F = 0$
+    
+    $$Ax^2 + Cy^2 = 0$$
+    Всегда можно считать, что $A$ и $C$ положительными, иначе умножим уравнение на $-1$. Переобозначим $A = a^2,\quad C=b^2$, имеем:
+    $$\boxed{a^2x^2 + b^2y^2 = 0}\eqno(5)$$
+    
+    \begin{definition}
+    Линия, которая в некоторой системе координат задаётся уравнением (5) называется \textbf{парой мнимых пересекающихся прямых}, а уравнение (5) --- \textbf{ каноническим уравнением пары мнимых пересекающихся прямых}.
+    \end{definition}
+    
+    2.4 $AC < 0$ ($A$ и $C$ имеют разные) и $F\neq 0$. Для определённости пусть $AF < 0,\quad CF > 0$, имеем
+    
+    $$Ax^2 + Cy^2 = - F\quad | : (-F)$$
+    $$\dfrac{x^2}{-\frac{F}{A}} + \dfrac{y^2}{-\frac{F}{C}} = 1$$
+    $-\dfrac{F}{A} = a^2$\\
+    $-\dfrac{F}{C} = -b^2$
+    
+    $$\boxed{\dfrac{x^2}{a^2} - \dfrac{y^2}{b^2} = 1}\eqno(6)$$
+    
+    \begin{definition}
+    Линия, которая в некоторой системе координат задаётся уравнением (6) называется \textbf{гиперболой}, а уравнение (6) --- \textbf{ каноническим уравнением гиперболы}.
+    \end{definition}
+    
+    2.5 $AC < 0,\quad F = 0$. Пусть $A > 0,\quad C < 0$, тогда обозначим $A = a^2 > 0,\quad C  = -b^2 < 0$, имеем:
+    
+    $$\boxed{a^2x^2 - b^2y^2 = 0}\eqno(7)$$
+    
+    $(ax - by)(ax + by) = 0 \Longrightarrow 
+    \left[
+    \begin{array}{c}
+         ax - by = 0\\
+         ax + by = 0
+    \end{array}\right.$
+    
+    \begin{definition}
+    Линия, которая в некоторой системе координат задаётся уравнением (7) называется \textbf{парой пересекающихся прямых}, а уравнение (7) --- \textbf{ каноническим уравнением пары пересекающихся прямых}.
+    \end{definition}
+    
+3. $AC = 0$, только один из них равен $0\quad \left(A^2 + C^2 > 0\right)$. Будем считать, что $A = 0$, а $C \neq 0$. Так как $C\neq 0$, то по теореме \ref{shift_2} слагаемого $y$ в первой степени нет. Имеем:
+
+$$Cy^2 + 2Dx + F = 0$$
+
+    3.1 $D\neq 0$
+    
+    $$Cy^2 + 2D\underbrace{\left(x + \dfrac{F}{2D}\right)}_{\textrm{сдвиг } \widetilde{w}} = 0$$
+    
+    $$C\widetilde{y}^2 + 2D\widetilde{x} = 0\quad | : C$$
+    
+    $y = \widetilde{y}$. Обозначим $\dfrac{D}{C} = -p$. И перестанем писать волну:
+    
+    $$\boxed{y^2 = 2px}\eqno(8)$$
+    
+    \begin{definition}
+    Линия, которая в некоторой системе координат задаётся уравнением (8) называется \textbf{параболой}, а уравнение (8) --- \textbf{ каноническим уравнением параболы}.
+    \end{definition}
+    
+    3.2 $D = 0,\quad F\neq 0$
+    
+    $$Cy^2 + F = 0$$
+    
+        3.2.1 $CF < 0$
+        
+        $$Cy^2 + F = 0\quad |: C$$
+        $$y^2 = -\dfrac{F}{C}$$
+        Обозначим $-\dfrac{F}{C} = a^2$
+        $$\boxed{y^2 = a^2}\eqno(9)$$
+        $(y-a)(y+a) = 0$
+        
+        \begin{definition}
+         Линия, которая в некоторой системе координат задаётся уравнением (9) называется \textbf{парой параллельных прямых}, а уравнение (9) --- \textbf{ каноническим уравнением пары параллельных прямых}.
+         \end{definition}
+         
+         3.2.2 $\dfrac{F}{C} > 0$. Пусть $\dfrac{F}{C} = a^2$.
+         
+         $$\boxed{y^2 = -a^2}\eqno(10)$$
+         
+         $y^2 + a^2 = 0 \Longleftrightarrow (y + ia)(y - ia) = 0$
+         
+         \begin{definition}
+         Линия, которая в некоторой системе координат задаётся уравнением (10) называется \textbf{парой мнимых параллельных прямых}, а уравнение (10) --- \textbf{ каноническим уравнением пары мнимых параллельных прямых}.
+         \end{definition}
+         
+         3.2.3 $F = 0,\quad A = 0,\quad C\neq 0,\quad D = 0$.
+         $$Cy^2 = 0\quad |:C$$
+         $$\boxed{y^2 = 0}\eqno(11)$$
+         
+         \begin{definition}
+         Линия, которая в некоторой системе координат задаётся уравнением (9) называется \textbf{двойной прямой}, а уравнение (9) --- \textbf{ каноническим уравнением двойной прямой}.
+         \end{definition}
+
+\begin{theorem}
+Кривая, заданная в <<хорошей>> системе координат уравнением (1) c помощью подходящей замены <<хороших>> координат приводится к одному из девяти попарно-различных канонических видов, перечисленных в таблице.
+\end{theorem}
+
+\includegraphics[width=0.2\linewidth]{ellips.eps}
+
+\newpage
+\begin{tabular}{p{0.15\linewidth}|p{0.15\linewidth}|p{0.4\linewidth}|p{0.3\linewidth}}
+     Условие        & Каноническое уравнение & Название & Картинка\\\hline
+     $AC > 0,\ F<0$ & $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = 1$ & Эллипс & \\\hline
+     $AC > 0,\ F>0$ & $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = -1$ & Мнимый эллипс & \\\hline
+     $AC > 0,\ F = 0$ & $a^2x^2 + b^2y^2 = 0$ & Пара мнимых пересекающихся прямых &  \\\hline
+     $AC < 0,\ F\neq 0$ & $\dfrac{x^2}{a^2} - \dfrac{y^2}{b^2} = 1$ & Гипербола & \\\hline
+     $AC < 0,\ F = 0$ & $a^2x^2 - b^2y^2 = 0$ & Пара пересекающихся прямых & \\\hline
+     $AC = 0,\ D\neq 0,\ (A\neq 0)$ & $y^2 = 2px$ & Парабола & \\\hline
+     $A = D = 0,\ FC < 0$ & $y^2 = a^2$ & Пара параллельных прямых & \\\hline
+     $A=D=0,\ FC > 0$ & $y^2 = -a^2$ & Пара мнимых параллельных прямых & \\\hline
+     $C\neq 0,\ A=D=F=0$ & $y^2 = 0$ & Двойная прямая & 
+\end{tabular}
+\newpage
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Эллипс.}
+
+$$ \frac{x^2}{a^2} + \frac{y^2}{b ^2} = 1, a \geqslant b > 0 $$
+
+\subsection{Зона картинки}
+
+Если $M(x,y)$ принадлежит эллипсу,то $|x| < a, |y| \leqslant b,$ т.е. вся прямая лежит в прямоугольнике $-a < x < a$, $-b < y < b$
+Вершинами эллипса называются точки $(a,0), (-a, 0), (0, b), (0, -b$ При этом $a$ - называется большей полуосью, $b$ называется меньшей полуосью.
+
+\subsection{Симметричность}
+
+Эллипс симметричен относительно осей координат и начала координат, то есть если точка $(x_0, y_0)$ принадлежит эллипсу, то точки $(-x_0, y_0), (-x_0, -y_0), (x_0, -y_0)$ тоже принадлежат эллипсу.
+
+\subsection{Внешний вид}
+
+При фиксировании $x, |x| < a$ получаем, что
+$$y^2 = b^2 \left(1 - \frac{x^2}{a^2}\right),
+\quad
+y_{\textrm{элл}} = \pm b \sqrt{1 - \frac{x^2}{a^2}} $$
+При $a = b$, т.е. при случае с окружностью
+$$y_{\textrm{окр}} = \pm a \sqrt{1 - \frac{x^2}{a^2}} $$
+$$\forall x\quad  \frac{y_1}{y_2} = \frac{\pm b \sqrt{1 - \dfrac{x^2}{a^2}}}{\pm a \sqrt{1 - \dfrac{x^2}{a^2}}} = \frac{b}{a}$$
+
+Таким образом эллипс результат равномерного сжатия окружности с центом $(0, 0)$
+
+
+\subsection{Фокусы}
+\begin{definition}
+ Факусами эллипса называются точки $F_1 (c, 0)$ и $F_2(-c, 0)$, где $c^2 = a^2 - b^2, c \geqslant 0$
+\end{definition}
+
+Отношения $\epsilon = c/a$ называется эксцентриситетом.
+Так как $c < a$, то для $\epsilon < 1$
+Если эллипс выродился в окружность (т.е. $a = b)$, то $c = 0$ и $\epsilon = 0$ для окружности.
+
+\subsection{Расстояние от точки эллипса до фокуса.} 
+
+\begin{theorem}
+
+ Расстояние от точки $M(x, y)$, лежащей в  элллипсе, до каждого из фокусов вляется линейной функции от абсциссы $x$ точки $M$ и выражается формулами:
+$$r_1 = |F_1 M| = a - \epsilon x $$
+$$r_1 = |F_2 M| = a + \epsilon x $$
+\begin{ourproof}{}
+
+$$r_1 = |F_1 M| = \sqrt{(x - c)^2 + (y - 0)^2} = \sqrt{(x^2 - 2 c x + c^2 + y^2} = \sqrt{x^2 - 2 c x + c^2 + b^2 - \frac{b^2 x^2}{a^2}} = $$
+$$= \sqrt{x^2 - 2 c x + a^2 - b^2 + b^2 - \frac{a^2 b^2 x^2 - b^2 c^2 x^2}{a^2}} = \sqrt{a^2 - 2 c x + \frac{c^2 x^2}{a^2}} = \sqrt{(a - \frac{c}{a} x)^2} = |a - \epsilon x|$$
+Т.к. $\epsilon < 1, a > x$ получаем, что 
+$$r_1 = a - \epsilon x$$ 
+Для $r_2$ аналогично. 
+\end{ourproof}
+\end{theorem}
+
+\subsection{Геометрические свойства эллипса.}
+\begin{theorem}
+
+ $M(x, y) \in $ элл  $\Leftrightarrow$ сумма расстояний от $M$ до фокусов величина постоянная и равная $2 a$
+\begin{ourproof}{}
+
+$\rightarrow$ Дано $M \in $ эллипс. Из п.5 $|F_2 M| + |F_1 M| = a + \epsilon x + a - \epsilon x = 2a$
+
+$\leftarrow$ Дано: $|F_1 M| + |F_2 M| = 2 a$. Надо доказать, что эта точка $M \in $ эллипс, т.е. удовлетворяет уравнению
+$$\sqrt{(x - c)^2 + y^2} + \sqrt{(x + c) ^ 2 + y^2} = 2 a $$
+$$\sqrt{(x - c)^2 + y^2} = 2 a - \sqrt{(x + c) ^ 2 + y^2} $$
+$$(x - c)^2 + y^2 = 4 a^2 - 4 a \sqrt{(x+c)^2 + y^2} + (x + c)^2 + y^2 $$
+$$c x + a^2 = a \sqrt{(x + c)^2 + y^2} $$
+$$a^2 (x^2 + 2 c x + c^2) + a^2 y^2 = a^4 + 2 a^2 c^2 x^2 $$
+$$x^2 (a^2 - c^2) + a^2 y^2 = a^2 (a^2 - c^2) $$
+$$x^2 b^2 + a^2 y^2 = a^2 b^2 $$
+$$\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$$
+\end{ourproof}
+\end{theorem}
+
+\subsection{Способ рисования эллипса} 
+(Надо просто послушать)
+
+\subsection{Фокально-директориальное свойство.}
+
+\begin{definition}
+ 
+Прямые $x = \dfrac{a}{\epsilon}$ и $x = - \dfrac{a}{\epsilon}$ называются директрисами эллипса $\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$
+\end{definition}
+
+\begin{theorem}
+ $M(x, y) \in $ эллипс $\Leftrightarrow$ отношение расстояние от $M$ до фокуса к расстоянию от $M$ до директрисы величина постоянноя и равна $\epsilon$.
+
+\begin{ourproof}{}
+
+$\rightarrow$ Дано: $M \in $ эллипс. 
+$$|M K_2| = d_2 = x - \left(- \frac{a}{\epsilon}\right) = x + \frac{a}{\epsilon} = \frac{1}{\epsilon}\left(x \epsilon + a\right) = \frac{r_2}{\epsilon}$$
+$$\frac{|M F_2|}{|M K_2} = \dfrac{r_2}{\dfrac{r_2}{\epsilon}} = \epsilon $$
+
+$\leftarrow$ Дано: для точки $M(x, y) \textrm{выполнено соотношение} \dfrac{|M F_2|}{|M K_2|} = \epsilon$. Вывести отсюда каноническое уравнение эллипса. 
+$$\frac{\sqrt{(x + c)^2 + y^2}}{x + \dfrac{a}{\epsilon}} = \epsilon \Rightarrow \sqrt{(x + c)^2 + y^2} = x \epsilon+ a \Rightarrow a \sqrt{(x + c)^2 + y^2} = a^2 + c x$$
+Последнее соотношение уже решалось в этой книжке и предлагается найти читателю это решение.
+\end{ourproof} 
+\end{theorem}
+
+\subsection{Касательная к эллипсу в его точке.}
+$\\ y - y_0 = f'(x_0)(x - x_0)$ - это уравнение касательной к графику $y = f(x)$
+
+Разобьем эллипс на два графика: 
+$$f_1(x) = b^2 \sqrt{1 - \frac{x^2}{a^2}}; \ f_2(x) = -b^2 \sqrt{1 - \frac{x^2}{a^2}}$$
+
+Пусть $y= f(x)$ - это либо $f1(x)$, либо $f_2 (x)$ (вычисления одинаковые)
+$$\frac{x^2}{a^2} + \frac{[f(x)]^2}{b^2} = 1 \ | \ \cdot\frac{d}{d x} $$
+$$\frac{2x}{a^2} + \frac{2 f(x) * f' (x)}{b ^ 2} = 0$$
+$$f' (x) = - \frac{b^2}{a^2} \cdot \frac{2x}{2 f(x)}, \ f(x) \neq 0 $$
+$$f' (x_0) = - \frac{b^2}{a^2} \cdot \frac{x_0}{y_0} (x - x_0)$$
+$$y - y_0 = -\frac{b^2}{a^2} \frac{x_0}{y_0} (x - x_0), \ | \ \cdot a^2 y_0 $$
+$$a^2 y y_0 + b^2 x x_0 = a^2 y_0^2 + b^2 x_0^2, \ | : a^2 b^2 $$
+$$\frac{y y_0}{b^2} + \frac{x x_0}{a^2} = \frac{y_0^2}{b^2} + \frac{x_0^2}{a^2} $$
+$$\frac{x x_0}{a^2} + \frac{y y_0}{b^2} = 1 $$
+Что и требовалось доказать.
+
+\subsection{Биссектриальное свойство касательной.}
+\begin{theorem}
+
+Касательная - биссектриса внешнего угла факального треугольника.
+\begin{ourproof}{}
+
+Двадцатью разными способами. Например, через уравнения прямых. 
+\end{ourproof}
+\end{theorem} 
+
+
+\section{Гипербола}
+
+$$\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1, \ a \geqslant b > 0 $$
+
+\subsection{Зона расположения.}
+Очевидно, что при $|x| < a$ точек гиперболы нет. 
+Точки $(-a, 0)$ и $(a, 0)$ принадлежат гиперболе и называются вершинами гиперболы. При чём $a$ называется дейстивительной полуосью, а $b$ мнимой.
+
+\subsection{Гипербола симметрична относительно осей и начала координат.}
+\begin{definition}
+Точка $(0, 0)$ - центр гиперболы.
+\end{definition}
+
+\subsection{Внешний вид.}
+
+Изучим точки пересечения гиперболы с прямыми, проходящими через начало координат
+$$\frac{x^2}{a^2} - \frac{y^2}{b^2} = 1 $$
+$$y = k x, \ k \geqslant 0 $$
+$$\frac{x^2}{a^2} - \frac{k^ 2 x^ 2}{b ^ 2} = 1 $$
+$$b^2 x^2 - k^2 a^2 x^2 = a^2 b^2 $$
+$$x^2 = \frac{a^2 b^2}{b^2 - k^2 a^2} $$
+$x = \pm \dfrac{a b}{\sqrt{b^2 - k^2 a^2}},$ еcли $b^2 - k^2 a^2 > 0$, т.е. $k < \frac{b}{a}$. \\ $x$ не существует, если $k \geqslant \frac{b}{a} $
+
+Обозначим $\sqrt{b^2 - k^2 a^2} = v$ (при $k < \frac{b}{a}$). Точки перечечения $(\dfrac{a b}{v}, \dfrac{a b k}{v}$ и $(-\dfrac{a b}{v}, -\dfrac{a b k}{v}$.
+Если $k = 0$, то $v = b$ и точка $(a, 0), (-a, 0)$. $k \rightarrow \dfrac{b}{a}$, тогда $v \rightarrow 0$ и абсциса точки на гиперболе $\to \infty$.
+
+\begin{definition}
+
+Прямые $y = \dfrac{b}{a} x$ и $y = - \dfrac{b}{a} x$ называются асимпотами гиперболы. ("Крайние" из прямых пучка $y = k x$, которые не пересекают гиперболу.
+\end{definition} 
+
+\begin{definition} Точки $F_1(c, 0)$ и $f_2(-c, 0)$, где $c^2 = a^2 + b^2$ , $c > 0,$ называются фокусами гиперболы.
+\end{definition}
+\begin{remark} $c > a$
+\end{remark}
+\begin{definition}
+Число $\epsilon = \frac{c}{a}$ называется эксценстриситетом гиперболы. У гиперболы $\epsilon > 1$
+\end{definition}
+
+\subsection{Расстояние до фокусов.}
+\begin{theorem} Расстояния от точки до на гиперболе до её фокусов считаются по формулам 
+
+Для правой ветви
+\\ $r_1 = |a - \epsilon x| = \epsilon x - a$, т.к. $\epsilon > 1, x \geqslant a$ 
+\\$r_2 = |a + \epsilon x| = a + \epsilon x$
+\\ Для левой ветви:
+$e > 1, x \leqslant -a $
+\\$r_1 = a - \epsilon x$
+\\$r_2 = - a - \epsilon x$
+\end{theorem}
+
+\subsection{Геометрическое свойство гиперболы}
+\begin{theorem}
+Точка $M$ принадлежит гиперболе тогда и только тогда , когда модуль разности расстояний от этой точки до фокусов величина постоянная и равная $2 a$
+\end{theorem} 
+
+\begin{definition} Прямые $x = \dfrac{a}{\epsilon}$ и $x = -\dfrac{a}{\epsilon}$ называется директрисами гиперболы. 
+\end{definition}
+\subsection{Как рисовать?}
+
+\subsection{Фокльно-директориальное свойство гиперболы}
+
+\begin{theorem}  $M(x, y)$ принадлежит эллипсу тогда и только тогда, когда отношение расстояния от этой точки до фокуса к расстоянию от точки до директрисы величина постоянная и равна $\epsilon$
+\end{theorem}
+
+\subsection{Уравнение касательной} Уравнение касательной к гиперболе в её точке $(x_0,  y_0)$: 
+$$\frac{x x_0}{a ^ 2} - \frac{y y_0}{b^2} = 1$$
+
+\subsection{Биссекториальное свойство касательной к гиперболе:} 
+
+Касательной к гиперболе является биссектрисой угла, образованного фокальными радиусами этой точки. 
+
+\section{Парабола} 
+\subsection{Уравнение}
+
+Общее уравнение параболы: $$y^2 = 2 p x, p > 0$$  
+
+\subsection{Симметричность}
+
+Парабола симметрична относительно оси OX
+
+\subsection{Фокус}
+
+Точка $\left(\dfrac{p}{2}, 0\right)$ называется фокусами параболы, а пряммая $x = -\dfrac{p}{2}$ называется директрисой параболы.
+
+\subsection{Расстояние до фокуса}
+
+Расстояние от точки $M(x, y)$ на параболе до фокуса равна $x + \dfrac{p}{2}$
+$$r = \sqrt{(x - \dfrac{p}{2})^2 + (y - 0)^2} = \sqrt{x^2 - p x + \dfrac{p^2}{4} + 2 p x} = \left\vert x + \dfrac{p}{2}\right\vert = x + \dfrac{p}{2}$$
+
+
+\subsection{Фокально-директориальное свойство параболы}
+
+\begin{theorem}
+
+Парабола - геометрическое место точек, равноудалённых от фокуса и от директрисы.
+\end{theorem}
+
+\subsection{Касательная к параболе}
+
+Уравнение параболы $y^2 = 2 p x$. Если $y = f(x)$ - график, то касательная в точке $(x_0, y_0 = f(x_0))$  к графику задаётся уравнением
+$$(y - y_0) = f'(x_0)(x - x_0) $$
+Пусть $f_1(x) = \sqrt{2 p x}, f_2(x) = - \sqrt{2 p x}$ и $f(x) $ это либо $f_1(x)$, либо $f_2(x)$.
+$$y^2 = 2 p x \ | \ \frac{d}{d x}$$
+$$2 y f'(x) = 2 p $$
+$$f'(x) = \frac{2 p}{2 y} = \frac{p}{f(x)} , \ f(x) \neq 0$$
+$$f'(x_0) = \frac{p}{x_0} = \frac{p}{y_0} $$
+$$y - y_0 = \frac{p}{y_0} (x - x_0) , \ *y_0$$
+$$y y_0 - y_0^2 = p x - p x_0 $$
+$$y y_0 - 2 p x_0 = p x - p x_0 $$
+$$y y_0 = p(x + x_0) $$
+Если $x_0 = 0$, то $y_0  = 0$, то $0 = p x \Rightarrow x = 0$
+
+
+\subsection{Биссектриальное свойство касательной к параболе} 
+\begin{theorem} Касательная к параболе в её точке  $(x_0, y_0)$ является биссектрисой между факальным радиусом этой точки, отложенный от этой точки, и направления параллельном оси $OX$
+\begin{ourproof}{}
+
+Выберем единичные векторы по данным направлениям и сложим их. Если сумма - направляющий вектор касательной, мы всё доказали. Если $\overline{e} = (1,0)$, то $\overline{r} = (x - \dfrac{p}{2}, y - 0) = (x_0 - \dfrac{p}{2}, y_0)$.
+$$\dfrac{\overline{r}}{|\overline{r}|} = \dfrac{(x_0 - \dfrac{p}{2}, y_0)}{\sqrt{(x_0 - \dfrac{p}{2})^2 + y_0^2}} = \dfrac{(x_0 - \dfrac{p}{2}, y_0)}{\sqrt{x_0^2 - x_0 p + \dfrac{p^2}{4} + 2 p x_0}} = \dfrac{(x_0 - \dfrac{p}{2}, y_0)}{\sqrt{x_0^2 + p x_0 + \dfrac{p^2}{4}}} = \dfrac{(x_0 - \dfrac{p}{2}, y_0)}{x_0 + \dfrac{p}{2}} $$
+Сложим единичный вектор с $\overline{e_1}$
+$$\frac{\overline{r}}{|\overline{r}|} + \overline{e_1} = (\dfrac{x_0 - \dfrac{p}{2}}{x_0 + \dfrac{p}{2}}, \dfrac{y_0}{x_0 + \dfrac{p}{2}}) + (1, 0) = (\dfrac{2 x_0}{x_0 + \dfrac{p}{2}}, \dfrac{y_0}{x_0 + \dfrac{p}{2}}) $$
+$$\tg \alpha = \dfrac{y_0}{2 x_0} = \dfrac{y_0}{\dfrac{y_0^2}{p}} = \dfrac{p}{y_0}$$
+\end{ourproof}
+\end{theorem}
+
+\section{Общая теория кривых второй степени}
+
+$$a_{11} x^2 +2 a_{12} x y + a_{22} y^2 + 2 a_1 x + 2 a_2 y + a_0 =0 \  \eqno(1)$$
+$$a_{11}^2 + a_{12}^2 + a_{22}^2 > 0 \eqno(1') $$
+
+Будем искать общие точки кривой (1) с прямой
+
+$$\begin{cases}
+x = x_0 + \alpha t \\
+y = y_0 + \beta t 
+\end{cases}\ \ \alpha^2 + \beta^2 > 0 \eqno(2)$$
+
+Подставим (2) в (1)
+$$a_{11} (x_0 + \alpha t)^2 + a_{12} (x_0 + \alpha t)(y_0 + \beta t) + a_{22} (y_0 + \beta t)^2 + 2a_1(x_0 + \alpha t) + 2 a_2 (y_0 + \beta t) + a_0 = 0 \eqno(3)$$
+$$P t^2 + 2Qt + R = 0 \eqno(4)$$
+$$P = a_{11} \alpha^2 + 2 a_{12} \alpha \beta + a_{22} \beta^2 \eqno(5)$$ 
+$$Q = (a_{11} x_0 + a_{12} y_0 + a_1) \alpha + (a_{12} x_0 + a_{22}y_0 + a_2) \beta \eqno(6)$$
+$$Q = (a_{11} \alpha + a_{12} \beta) x_0 + (a_{12} \alpha + a_{22} \beta) y_0 + a_1 \alpha + a_2 \beta \eqno(7) $$
+$$R = a_{11} x_0^2 + 2 a_{12} x_0 y_0 + a_{22} y_0^2 + 2 a_1 x_0 + 2 a_2 y_0 + a_0 \eqno(8) $$
+Уравненеи (4) имеет в $\mathbb{R}$ не более двух корней:
+\begin{itemize}
+    \item 2 корня - 2 точки пересечения с прямой
+    \item 1 корень, то есть 2 равных корня - прямая касается кривой. 
+    \item 0 корней - нет точек пересечение
+\end{itemize}
+
+\textbf{Исключительный случай:} $P = 0 \Leftrightarrow a_{11} \alpha^2 + 2 a_{12} \alpha \beta + a_{22} \beta^2 = 0 \ (9)$
+
+Условие (9) не зависит от $(x_0, y_0)$, а зависит только от направления $(\alpha, \beta)$
+
+Из (4) при условии (9) мы можем получить один из трех случаев. 
+\begin{itemize}
+    \item $Q \neq 0$ - один корень (для $t$) - одна точка пересечения, но не касания
+    \item $Q = 0, R = 0$ - $0 = 0$ - бесконечно много точек пересечения, и вся прямая (2) принадлежит кривой (1)
+    \item $Q = 0, R \neq 0$ - нет решений --- нет точек пересечения
+\end{itemize}
+
+\begin{definition} Направление $(\alpha, \beta)$, определеяется условием (9) (т.е. $P = 0$), называется асимптотическим направлением для кривой (1). 
+\end{definition}
+
+\begin{definition}
+$\delta = 
+\begin{vmatrix} 
+a_{11} & a_{12} \\
+a_{12} & a_{22} 
+\end{vmatrix}$
+\end{definition}
+
+
+
+\begin{theorem}
+
+Кривая степени 2 имеет: 
+\\ а) 2 ассимптоты направления, если $\delta < 0$
+\\ б) 1 ассимптоту направления, если $\delta = 0$
+\\ в) 0 ассимптот направлений, если $\delta > 0$
+
+\begin{ourproof}{}
+
+Случай 1) $a_{11} = a_{22} = 0 \Rightarrow a_{12} \neq 0$ , $\delta = || = -a_{12}^2 < 0$
+\\ Уравнение (9) имеет вид $2 a_{12} \alpha \beta = 0.$ Решения: $(\alpha, \beta) = (1,0)$; $(\alpha, \beta) = (0,1)$
+
+Случай 2) $a_{22} \neq 0. \Rightarrow \alpha \neq 0$. Поделим (9) на $\alpha^2$
+$$a_{11} + 2 a_{12}\left( \frac{\beta}{\alpha}\right) + a_{22} \left(\frac{\beta}{\alpha}\right)^2$$
+$$a_{21} \left(\frac{\beta}{\alpha}\right)^2 + 2 a_{12} \left(\frac{\beta}{\alpha}\right) + a_{11} = 0  $$
+$$ D = a_{12}^2 - a_{11} a_{22} = -\delta$$
+\begin{itemize}
+    \item Если $-\delta > 0$, то два решения
+    \item Если $-\delta = 0$, то одно решение
+    \item Если $-\delta < 0$, то нет решений
+\end{itemize}
+
+Случай 3) $a_{11} \neq 0$ - полный аналог случая 2).
+\end{ourproof}
+\end{theorem}
+
+\begin{definition} 
+Кривые
+
+\begin{itemize}
+    \item C $\delta > 0$ называются эллиптического типа \item С $\delta = 0 $ называются прямыми параболического типа \item C $\delta < 0$ гиперболического типа.
+\end{itemize}
+\end{definition}
+
+\subsection{Эллипс}
+$$ \frac{x^2}{a^2} + \frac{y^2}{b^2} = 1 $$
+$$\delta = 
+\begin{vmatrix}
+\frac{1}{a^2} & 0 \\
+0 & \frac{1}{b^2}
+\end{vmatrix}
+= \frac{1}{a^2 b^2} > 0  \quad \textrm{--- эллептического типа}$$
+
+
+\subsection{Гипербола}
+$$ \frac{x^2}{a^2} - \frac{y^2}{b^2} = 1 $$
+$$\delta = 
+\begin{vmatrix}
+\frac{1}{a^2} & 0 \\
+0 & -\frac{1}{b^2}
+\end{vmatrix}
+= -\frac{1}{a^2 b^2} < 0 \quad \textrm{--- гиперболического типа}$$
+
+\subsection{Парабола}
+$$y^2 = 2 p x $$
+$$\delta = 
+\begin{vmatrix}
+0 & 0 \\
+0 & 1
+\end{vmatrix}
+= 0 \quad \textrm{--- параболического типа}$$
+
+\begin{definition}
+\textbf{Хордой кривой} называется отрезок прямой, концы которого лежат на кривой, а остальные точки не лежат на кривой.
+\end{definition}
+\begin{corollary}
+Хорда не может содержать асимптотического направления
+\end{corollary}
+Пусть $(\alpha, \beta)$ - не асимпптотическое направления. Рассмотрим множество середин всех хорд этого направления. Путь $M_0 (x_0, y_0)$ - начальные точки прямой $(2)$ - середина хорды.$\Rightarrow$ общие точки кривой (1) и кривой (2) симметричны относительно точки $M_0$. $\Rightarrow$ корни $t_{1,2}$ обладают свойством $t_1 = -t_2 \neq 0$ $\Rightarrow$ $Q = 0$ по теореме  Виета. То есть середины хорд направления $(\alpha, \beta)$ удовлетворяют уравнению $(7) = 0$
+$$(a_{11} \alpha + a_{12} \beta) x_0 + (a_{12} \alpha + a_{22} \beta) y_0 + a_1 \alpha + a_2 \beta = 0 $$
+Следовательно на прямой
+$$(a_{11} \alpha + a_{12} \beta) x + (a_{12} \alpha + a_{22} \beta) y + a_1 \alpha + a_2 \beta = 0 \eqno(10)$$
+лежат середины всех хорд направления $(\alpha, \beta)$
+
+\begin{definition}
+Прямая, определеяемая уравнением (10), называется \textbf{диаметром кривой} (1), сопряженным направлению $(\alpha, \beta)$
+\end{definition}
+
+
+\begin{theorem}
+Определение диаметра корректно. (То есть уравнение (10) действительно определяет прямую)
+\begin{proof}
+(10) не прямая, если 
+$\begin{cases}
+a_{11} \alpha + a_{12} \beta = 0  \ | \cdot \alpha \\
+a_{12} \alpha + a_{22} \beta = 0 \ | \cdot \beta 
+\end{cases}$
+
+$$a_{11} \alpha^2 + 2_{12} \alpha \beta + a_{22} \beta^2 = 0 $$
+Следовательно, $(\alpha, \beta)$ это асимптотическое направление (см. (9)) - не может быть по условию.
+\end{proof}
+\end{theorem}
+
+Перепишем (10) <<в виде (6)>>:
+$$(a_{11} x + a_{12}y + a_1) \alpha + (a_{12}x + a_{22} y+ a_2) \beta = 0  \eqno(11) $$
+(11) определеяет пучок прямых, если
+$$\frac{a_{11}}{a_{12}} \neq \frac{a_{12}}{a_{22}} \textrm{, то есть прямые } a_{11} x + a_{12} y + a_1 = 0 \textrm{ и } a_{12} x + a_{22} y + a_2 = 0 $$
+перескаются, то это пучок с центром в точке, определяемой системой 
+$$\begin{cases}
+a_{11} x + a_{12} y + a_1 = 0 \\
+a_{12} x + a_{22} y + a_2 = 0
+\end{cases} \eqno(12)$$
+\\ А если $\dfrac{a_{11}}{a{12}} = \dfrac{a_{12}}{a_{22}}$, то (11) пучок параллельных прямых.
+\\ Если обычный пучок, то $\delta \neq 0$, если пучок параллельных прямых, то $\delta = 0$
+
+Пусть $(\alpha, \beta$) не асимптотические направления. Таким образом, при $\delta = 0$ все диаметры параллельны друг другу. а при $\delta \neq 0$ все диаметры пересекаются в точке решения системы (12). В этом пучке могут быть прямые асимптотических направлений.
+
+\begin{theorem}{(Теорема А.)}
+Решение системы (12) является центром симметрии кривой.
+\begin{proof}
+Путь решение системы 12 - точка $O$. Примем эту точку за начальную точку прямой (2).
+\\ Случай а). Пусть (2) имеет не асимптотическое направление, значит $P \neq 0$. $Q = 0$, в силу (6). Уравнение (4) принимает вид $P t^2 + R = 0 \Rightarrow t_{1,2} = \pm\sqrt{-\dfrac{R}{P}}$, т.е. либо \\$t_1 = -t_2$, т.е. 2 точки пересечения, симметричные относительно точки $O$, либо \\$t_1 = t_2$ т.е. точка $O$ симметрична самой себе относительно себя, либо \\корни мнимые - $\varnothing$ симметрично $\varnothing$
+\\ Случай б) Пусть (2) имеет асимптотическое направление. В этом случае $P = 0$, $Q = 0$ в силу (6). Значит (4) принимает вид $R = 0 (*)$.
+\\ Если $R = 0 - True$, то (*) верно при любых $t$.
+\\ Если $R = 0 - False$, то (*) всегда неверно, но $\varnothing$ симметрично $\varnothing$ 
+\end{proof}
+\end{theorem}
+
+\subsection{Определение каноническиого вида по инвариантам.}
+$$a_{11} x^2 + 2 a_{12} x y + a_{22} y^2 + 2 a_1 x + 2 a_2 y + a_0 = 0 , \ a_{11}^2 + a_{12}^2 + a_{22}^2 > 0$$
+Ортогональный инвариант:
+$ = t
+\begin{vmatrix}
+a_{11} & a_{12}\\
+a_{12} & a_{22}
+\end{vmatrix} = a_{11} + a_{22}$
+\\ 1) $\delta > 0$ - эллипс или пара мнимых прямых или мнимый эллипс
+\\ 2) $\delta < 0 \Rightarrow \lambda_1 \lambda_2 < 0 \Rightarrow \lambda_1 $ и $\lambda_2$ разных знаков.
+
+2.1) Если при этом $\Delta = 0$, то $\tau = 0 \Rightarrow \alpha^2 x^2 - \beta^2 y^2 = 0$ - пара пересекающих прямых
+
+2.2) Если при этом $\Delta \neq 0$, то $\tau \neq 0 \Rightarrow \alpha^2 x^2 - \beta^2 y^2 + \tau = 0$ - гипербола
+\\ Вывод для Вида $I$:
+$\delta > 0, \ \Delta = 0 \Rightarrow $ пара мнимых пересекающихся прямых
+
+$\delta > 0 \ S_\Delta < 0 \Rightarrow$ эллипс
+
+$\delta > 0 \ S_\Delta > 0 \Rightarrow$ мнимый эллипс
+
+$\delta < 0 \ \Delta = 0 \Rightarrow$ пара пересекающихся прямых
+
+$\delta < 0 \ \Delta \neq 0 \Rightarrow$ гипербола
+\\ Вид (II). $F = \lambda_2 y^2 + 2 b_1 x = 0, \ \lambda_2 b_1 \neq 0$
+$$\delta = 0 \ S = \lambda_2 \neq 0 \ \Delta = -b_!^2 \lambda_2 \neq 0 $$
+$$b1 = \pm \sqrt{-\frac{\Delta}{\lambda^2}} = \pm \sqrt{-\frac{\Delta}{S}} \ (\Delta S = -b_1^2 \lambda_2 * \lambda_2 = - b_1^2 \lambda_2^2 $$
+\\ Ясно, что $F = 0$ определяет параболу $y^2 = -\frac{2 b_1}{\lambda_2} x$;
+$$p = \frac{b_1}{\lambda_2} = \frac{\pm \sqrt{\frac{-\Delta}{3}}}{\lambda_2} = \pm \sqrt{-\frac{\Delta}{S^3}} $$
+\\ Всегда можно брать $p = \pm \sqrt{-\frac{\Delta}{S^3}} $ - направление оси OX можно сменить на противоположное
+\\ Вывод II. $\delta = 0, \Delta \neq 0$ - парабола
+\\ Вид III. $F = \lambda_2 y^2 + \tau, \ \lambda_2 \neq 0$
+$$\delta = 0, \Delta = 0, S = \lambda_2 \neq 0 \tau \textrm{ через } \Delta \textrm{ и } \delta \textrm{ выразить нельзя!} $$
+\begin{definition}
+$K = \begin{vmatrix}
+a_{11} & a_1 \\
+a_1 & a_0
+\end{vmatrix} + \begin{vmatrix}
+a_{22} & a_2 \\
+a_2 & a_0
+\end{vmatrix}$
+\end{definition}
+
+\begin{lemma}
+Корни характеристического многочлена $\chi_{A} (\lambda)$ матрица $A =  \begin{pmatrix}
+a_{11} & a_{12} & a_1  \\
+a_{12} & a_{22} & a_2 \\
+a_1 & a_2 & a_0
+\end{pmatrix}$ не меняются при замене прямоугольной системы координат без переноса начала.
+
+\begin{ourproof}
+В этом случае матрица $D$ имеет вид $D =  \begin{pmatrix}
+c_{11} & c_{12} & 0 \\
+c_{21} & c_{22} & 0 \\
+0 & 0 & 1
+\end{pmatrix}$. C - ортогональный по условию, но тогда и D в нашем случае ортогональная матрица. 
+$$\chi_A (\lambda) = |A - \lambda E|, \ \chi_{A'} (\lambda) = |A' - \lambda E| = |D^T A D - \lambda E| = |D' A D - \lambda D^T E D|  =$$
+
+$$ =|D^T(A - \lambda E)D| = |D^T||D||A - \lambda E| = |E||A - \lambda E| = |A - \lambda E| $$
+\end{ourproof}
+
+\end{lemma}
+
+\begin{theorem}
+Если $\delta = \Delta = 0$, то $K$ - ортогональный инвариант. Он называется полуинвариантом (семиинвариантом)
+\begin{ourproof}
+\begin{multline}
+\chi_A (\lambda) =  \begin{vmatrix}
+a_{11} - \lambda & a_{12} & a_1 \\
+a_{12} & a_{22} - \lambda & a_2 \\
+a_1 & a_2 & a_0 - \lambda
+\end{vmatrix} = -\lambda^3 + (a_{11} + a_{22} + a_0)\lambda^2 - \left( \begin{vmatrix}
+a_{22} & a_2 \\
+a_2 & a_0
+\end{vmatrix} + \begin{vmatrix}
+a_{11} & a_1 \\
+a_1 & a_0
+\end{vmatrix} + \begin{vmatrix}
+a_{11} & a_{12} \\
+a_{12} & a_{22}
+\end{vmatrix}\right) * \lambda + \Delta =\\
+= -\lambda^3 + (a_0 + S) \lambda^2 - (K + \delta)\lambda + \Delta
+\end{multline}
+
+a) В силу лемммы, $K$ сразу инвариант, если нет сдвига начала координат.
+
+б) Пусть $\delta = \Delta = 0$ (условие теоремы). $a_{12} $ можно считать равным нулю, посколько он уничтожается с помощью поворота независимо от того, где выбрано начало.
+
+Пусть $a_{12} = 0 \Rightarrow \delta =  \begin{vmatrix}
+a_{11} & 0 \\
+0 & a_{22}
+\end{vmatrix}  = a_{11} * a_{22} = 0$. Пусть $A_{11}= 0$, но $a_{22} \neq 0$
+
+$\Delta =  \begin{vmatrix}
+0 & 0 & a_1 \\
+0 & a_{22} & a_2  \\
+a_1 & a_2 & a_0
+\end{vmatrix} = -a_1^2 a_{22} = 0 \Rightarrow a_1 = 0$. Тогда $F$ имеет вид: 
+$$F = a_{22} y^2 + 2 a_2 y + a_0 $$
+Сделаем замену координат: $\begin{cases}
+x = x' + x_0 \\
+y = y' + y_0
+\end{cases}$
+
+$$F' = F(x(x',y'), y(x', y')) = a_{22} (y' + y_0)^2 + 2a_2 (y' + y_0) + a_0 = a_{22} y'^2 + 2(a_{22} y_0 + a_2)y' + (a_{22} y_0^2 + 2 a_2 y_0 + a_0) $$
+$$a_{22}' = a_{22}$$ 
+$$a_2' = a_{22} + a_2$$
+$$a_0' = a_{22} y_0^2 + 2 a_2 y_0 + a_0 $$
+
+$A =  \begin{pmatrix}
+0 & 0 & 0 \\
+0 & a_{22} & a_2 \\
+0 & a_2 & a_0
+\end{pmatrix} ,\quad A' =  \begin{pmatrix}
+0 & 0 & 0 \\
+0 & a_{22}' & a_2' \\
+0 & a_2' & 2_0'
+\end{pmatrix}$
+
+
+$$K = 0 + a_{22} a_0 - a_2^2$$
+$$K' = 0 + a_{22}' a_0' - a_2'^2 = a_{22}(a_{22}y_0^2 + 2 a_2 y_0 + a_0) - (a_{22} y_0 + a_2)^2 = a_{22} a_0 - a_2^2$$
+\end{ourproof}
+\end{theorem}
+
+\\ Вернёмся к квадрика вида III: $F = \lambda_2 y^2 + \tau = 0$
+\\ $A =  \begin{pmatrix}
+0 & 0 & 0 \\
+0 & \lambda_2 & 0 \\
+0 & 0 & \tau
+\end{pmatrix},\quad S = \lambda_2 \neq 0$, $\delta = \Delta = 0$, $K=\lambda_2 \tau \Rightarrow \tau = \frac{K}{\lambda_2} = \frac{K}{S}$
+\\ Итак, если $\delta = \Delta = 0$, то
+
+При $K > 0 \Rightarrow \lambda_2$ и $\tau$ одного знака $\Rightarrow$ мнимые параллельные прямые
+
+При $K < 0 \Rightarrow \lambda_2$ и $\tau$ разных знаков $\Rightarrow$ параллельные прямые 
+
+При $K = 0 \Rightarrow \tau = 0 \Rightarrow$ двойная прямая
+
+\begin{tabular}{p{0.4\linewidth}|p{0.1\linewidth}|p{0.1\linewidth}|p{0.3\linewidth}}
+     Название        & Инварианты & Инвариант & Картинка\\\hline
+     1) Эллипс & $\delta > 0$ & $S \Delta < 0$ &  Эллиптический тип, центральные\\\hline
+     2) Мнимый эллипс & $\delta > 0$ & $S \Delta < 0$ & Эллиптический тип, центральные\\\hline
+     3) Пара  мнимых переекающихся прямых. & $\delta > 0$ & $\Delta = 0$ & Эллиптический тип, центральные \\\hline
+     4) Гипербола & $\delta < 0$ & $\Delta \neq 0$ & Гиперболический тип, центральные\\\hline
+     5) Пара пересекающихся прямых & $\delta < 0$ & $\Delta = 0$ & Гиперболический тип, центральные\\\hline
+     6) Парабола & $\delta = \Delta 0$ & $\Delta \neq 0$ & Параболический тип, нецентральные\\\hline
+     7) Пара параллельных прямых & $\delta = \Delta = 0$ & $K < 0$ & Параболический тип, нецентральные\\\hline
+     8) Пара мнимых параллельных прямых & $\delta = \Delta = 0$ & $K > 0$ & Параболический тип, нецентральные\\\hline
+     9) Двойная прямая & $\delta = \Delta = 0$ & $K = 0$ & Параболический тип, нецентральные \\\hline
+\end{tabular}
+
+\begin{theorem}
+Эта таблица даёт необходимое и достаточное условие принадлежности кривой степени 2 тому или иному типу.
+\\
+\begin{ourproof}
+$\leftarrow$ Доказательство - это наш вывод типов по инвариантам
+\\$\rightarrow$ Проверка, достаточно её сделать для каноническигого уравнения
+
+Пример: Пусть кривая - эллипс: $\dfrac{x^2}{a^2} + \dfrac{y^2}{b^2} = 1$
+$A =  \begin{pmatrix}
+\dfrac{1}{a^2} & 0 & 0 \\
+0 & \dfrac{1}{b^2} & 0 \\
+0 & 0 & -1
+\end{pmatrix}, \delta >0$, $\Delta S < 0$
+
+\end{ourproof}
+\end{theorem}
+
+
+\begin{theorem}
+Существует и единственная кривая степени два, проходящая через 5 точек, если никакие 4 из них не лежат на одной прямой.
+\begin{ourproof}
+Пусть $P_i (x_i, y_i), i = 1,2,...,5$ - такие 5 данных точек. Подставим каждой из них в общее уравнение кривой степени 2, мы получим линейное уравнение для коэффициентов. 
+$$a_{11} x^2 +2 a_{12} x y + a_{22} y^2 + 2 a_1 x + 2 a_2 y + a_0 =0$$
+$$F(x, y) = F(P_1) = a_{11} x^2 +2 a_{12} x y + a_{22} y^2 + 2 a_1 x + 2 a_2 y + a_0 =0 $$
+Пишем это 5 раз для $P_1, P_2, ..., P_5$. Уравнение однородное, решений бесконечно много. Нам нужно решение только с точностью до постоянно ненулевого множителя, поэтому не страшно, что неизвестных 6, а уравнений 5. 
+докажем, что уравнение этой системы линейно независимо. Доказывать будем от противного. Пусть, для определенности, 5-ое есть линейная комбинация остальных 4-ёх уравнений. Тогда любая кривая степени 2, проходящие через первые 4 точки $P_1, P_2, P_3, P_4$, проходят и через $P_5$
+\\ Случай 1). Три точки из $P_1, P_2, P_3, P_4$ лежат на одной прямой "$l$".  Через $P_4$ порведем прямую  $m \neq l$ и не проходящую через $P_5$
+Рассмотрим прямую $m \cup l$ - кривая степени 2. Не проходит через $P_5$ - противоречение.
+\\ Случай 2) Никакие три точки из множества $P_4$ не лежат на одной прямой.
+\\ $q_1 = (P_1 P_2) \cup (P_3 P_4)$ - кривая степени 2
+\\ $q_2 = (P_1 P_4) \cup (P_2 P_3)$ - кривая степени 2
+\\ По предложению от противного $P_5 \in q_1, \ P_5 \in q_2 \Rightarrow P_5 \in q_1 \cup q_2 \Rightarrow P_5 \in \{P_1,P_2, P_3, P_4\} $ - противоречие.
+\end{ourproof}
+\end{theorem}
+\begin{definition}
+Шестивершнинником называется упорядоченный набор шести точек на плоскости, при условии, что никакие три из них не лежат на одной прямой. 
+\end{definition}
+\begin{definition}
+Если $\{A_1, A_2, A_3, A_4, A_5, A_6 \}$ шестивершинник, то стороны $(A_1 A_2)$ и $(A_4 A_5)$, $(A_2 A_3) $ и $(A_5 A_6)$, $(A_3 A_4)$ и $(A_6, A_1)$ называется парами противоположных сторон.
+\end{definition}
+\begin{definition}
+Коникой называется либо эллипс, либо гипербола, либо парабола, либо маленький конь.
+\end{definition}
+
+\begin{theorem}
+Теорема Паскаля.
+Точки пересечений продолжений противоположных сторон шестивершинника, вписанного в конику, лежат на одной на одной прямой.
+\end{theorem}
+
+\begin{theorem}
+Теорема о мистическом шестивершиннике. 
+\end{theorem}
+
+
+
+
+
+
+\end{document}
+
+
